@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ABC.Data.Party;
 using Soft.Data;
 
 namespace Soft.Data
@@ -13,6 +14,6 @@ namespace Soft.Data
             : base(options)
         {
         }
-        public DbSet<Soft.Data.Person> Person { get; set; }
+        public DbSet<PersonData> Persons { get; set; }
     }
 }
