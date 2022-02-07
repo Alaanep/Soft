@@ -21,7 +21,7 @@ namespace ABC.Domain.Party
         public string FirstName => data?.FirstName ?? defaultStr;
         public string LastName=>data?.LastName??defaultStr;
         public bool Gender=>data?.Gender?? defaultGender;
-        public DateTime Dob => data?.DoB ?? defaulDate;
+        public DateTime Dob => data?.Dob?? defaulDate;
         public PersonData Data => data;
         public override string ToString() => $"{FirstName} {LastName} {Gender} {Dob}";
     }

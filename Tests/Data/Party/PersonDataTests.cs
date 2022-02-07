@@ -14,6 +14,6 @@ namespace ABC.Tests.Data.Party
         [TestMethod] public void FirstNameTest() => isProperty<string?>();
         [TestMethod] public void LastNameTest() => isProperty<string?>();
         [TestMethod] public void GenderTest() => isProperty<bool?>();
-        [TestMethod] public void DoBTest() => isProperty<DateTime?>();
+        [TestMethod] public void DobTest() => isProperty<DateTime?>();
     }
 }

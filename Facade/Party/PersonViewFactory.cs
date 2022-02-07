@@ -12,7 +12,7 @@ namespace ABC.Facade.Party
             FirstName = v.FirstName,
             LastName = v.LastName,
             Gender = v.Gender,
-            DoB = v.Dob
+            Dob = v.Dob
         });
             
         

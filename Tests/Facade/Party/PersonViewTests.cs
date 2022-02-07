@@ -12,7 +12,7 @@ namespace ABC.Tests.Facade.Party
         [TestMethod] public void FirstNameTest() => isProperty<string?>();
         [TestMethod] public void LastNameTest() => isProperty<string?>();
         [TestMethod] public void GenderTest() => isProperty<bool?>();
-        [TestMethod] public void DateTimeTest() => isProperty<DateTime?>();
+        [TestMethod] public void DobTest() => isProperty<DateTime?>();
         [TestMethod] public void FullNameTest() => isProperty<string?>();
     }
 }
