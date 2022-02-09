@@ -1,0 +1,30 @@
+﻿@model Microsoft.AspNetCore.Mvc.RazorPages.PageModel
+
+@{
+    ViewData["Title"] = "Create";
+    ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
+    Layout = "_Layout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>@ViewData["SubTitle"]</h4>
+<hr />
+
+<form method="post" asp-page-handler="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @RenderBody()
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        &nbsp;
+        <a asp-page="Index" asp-page-handler="Index">Back to List</a>
+    </div>
+</form>
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
