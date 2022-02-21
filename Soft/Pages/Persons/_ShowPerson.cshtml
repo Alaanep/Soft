@@ -1,0 +1,7 @@
+﻿@model Soft.Pages.Persons.PersonsPage
+@using ABC.Pages.Extensions
+
+@MyViewerForHtml.MyViewerFor(Html, m => m.Person.FirstName)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Person.LastName)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Person.Gender)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Person.Dob)
