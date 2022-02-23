@@ -1,6 +1,4 @@
-﻿
-
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -12,8 +10,7 @@ namespace ABC.Pages.Extensions
         {
             var h = htmlStrings(html, expression);
             return new HtmlContentBuilder(h);
-        }
-
+        } 
         private static List<object> htmlStrings<TModel, TResult>(IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression)
         {
             var list = new List<object>();
@@ -28,7 +25,6 @@ namespace ABC.Pages.Extensions
                     list.Add(html.ValidationMessageFor(expression, null, new {@class="text-danger"}));
                 list.Add(new HtmlString("</dd>"));
             list.Add(new HtmlString("</div>"));
-
             return list;
         }
     }

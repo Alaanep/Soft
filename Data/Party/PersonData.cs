@@ -1,9 +1,8 @@
 ﻿
 namespace ABC.Data.Party
 {
-    public class PersonData
+    public class PersonData: EntityData
     {
-        public string Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public bool? Gender { get; set; }

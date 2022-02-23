@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq.Expressions;
 
-
 namespace ABC.Pages.Extensions
 {
     public static class MyViewerForHtml
@@ -12,10 +11,8 @@ namespace ABC.Pages.Extensions
             var h = htmlStrings(html, expression);
             return new HtmlContentBuilder(h);
         }
-
         private static List<object> htmlStrings<TModel, TResult>(IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression)
         {
-            
             var list = new List<object>();
             list.Add(new HtmlString("<dl class=\"row\">"));
             list.Add(new HtmlString("<dt class=\"col-sm-2\">"));
