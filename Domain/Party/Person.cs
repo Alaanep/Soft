@@ -7,7 +7,7 @@ namespace ABC.Domain.Party
     {
     private const string defaultStr = "Undefined";
     private bool defaultGender = true;
-    private DateTime defaulDate = DateTime.MinValue;
+    private DateTime defaultDate = DateTime.MinValue;
 
     public Person() : this(new PersonData()) { }
     public Person(PersonData d): base(d){}
@@ -15,7 +15,7 @@ namespace ABC.Domain.Party
     public string FirstName => Data?.FirstName ?? defaultStr;
     public string LastName => Data?.LastName ?? defaultStr;
     public bool Gender => Data?.Gender ?? defaultGender;
-    public DateTime Dob => Data?.Dob ?? defaulDate;
+    public DateTime Dob => Data?.Dob ?? defaultDate;
     public override string ToString() => $"{FirstName} {LastName} {Gender} {Dob}";
     }
 }

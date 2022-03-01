@@ -1,6 +1,4 @@
-﻿
-using System.Threading.Tasks;
-using ABC.Data;
+﻿using ABC.Data;
 using ABC.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,10 +35,10 @@ namespace ABC.Infra
         public bool Delete(string id) => DeleteAsync(id).GetAwaiter().GetResult();
         public async Task<bool> DeleteAsync(string id)
         {
-            var d = await set.FindAsync(id);
             try
             {
-                if (d != null) return false;
+                var d = await set.FindAsync(id);
+                if (d == null) return false;
                 set.Remove(d);
                 await db.SaveChangesAsync();
                 return true;
