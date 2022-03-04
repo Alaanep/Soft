@@ -4,7 +4,7 @@ using ABC.Aids;
 
 namespace ABC.Tests;
 
-public abstract class BaseTests<Tclass>: TestAsserts where Tclass: class, new()
+public abstract class BaseTests<Tclass>: IsTypeTested where Tclass: class, new()
 {
     protected Tclass obj;
     protected  BaseTests()=>obj=new Tclass();//genereerib abstraktselt Tclass objekti
