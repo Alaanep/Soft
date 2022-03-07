@@ -15,7 +15,8 @@ public abstract class BaseTests<Tclass>: IsTypeTested where Tclass: class, new()
         var propertyInfo = obj.GetType().GetProperty(memberName);
         isNotNull(propertyInfo);
         if (isNullOrDefault(value)) value = random<T>();
-        if(canWrite(propertyInfo, isReadOnly))propertyInfo.SetValue(obj, value);
+        if (!canWrite(propertyInfo, isReadOnly)) return;
+        propertyInfo.SetValue(obj, value);
         areEqual(value, propertyInfo.GetValue(obj));
 
     }

@@ -1,19 +1,24 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using ABC.Infra.Party;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ABC.Data.Party;
-using Soft.Data;
 
 namespace Soft.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<PersonData> Persons { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            initializeTables(modelBuilder);
+        }
+
+        private static void initializeTables(ModelBuilder modelBuilder)
+        {
+            ABCDb.InitializeTables(modelBuilder);
+        }
     }
 }
