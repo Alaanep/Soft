@@ -1,5 +1,5 @@
 ﻿@page
-@model ABC.Pages.PersonsPage;
+@model ABC.Pages.AddressesPage;
 
 @{
     ViewData["Title"] = "Index";
@@ -17,16 +17,19 @@
             @Html.DisplayNameFor(model => model.Items[0].FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].FirstName)
+            @Html.DisplayNameFor(model => model.Items[0].Street)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].LastName)
+            @Html.DisplayNameFor(model => model.Items[0].City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].Gender)
+            @Html.DisplayNameFor(model => model.Items[0].Region)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].Dob)
+            @Html.DisplayNameFor(model => model.Items[0].ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].Country)
         </th>
         <th></th>
     </tr>
@@ -38,16 +41,19 @@
             @Html.DisplayFor(modelItem => item.FullName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
+            @Html.DisplayFor(modelItem => item.Street)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LastName)
+            @Html.DisplayFor(modelItem => item.City)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Gender)
+            @Html.DisplayFor(modelItem => item.Region)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Dob)
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
         </td>
         <td>
             <a asp-page="./Edit" asp-page-handler="Edit" asp-route-id="@item.Id">Edit</a> |

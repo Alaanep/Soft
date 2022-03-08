@@ -1,10 +1,12 @@
 ﻿using ABC.Data.Party;
+using ABC.Domain.Party;
 using Microsoft.EntityFrameworkCore;
 
 namespace ABC.Infra.Party {
     public sealed class ABCDb: DbContext {
         public ABCDb(DbContextOptions<ABCDb> options) : base(options) { }
         public DbSet<PersonData> Persons { get; set; }
+        public DbSet<AddressData> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -14,7 +16,9 @@ namespace ABC.Infra.Party {
 
         public static void InitializeTables(ModelBuilder modelBuilder)
         {
-            modelBuilder?.Entity<PersonData>()?.ToTable(nameof(Persons), nameof(ABCDb).Substring(0, 4));
+            var s = nameof(ABCDb).Substring(0, 4);
+            modelBuilder?.Entity<PersonData>()?.ToTable(nameof(Persons), s);
+            modelBuilder?.Entity<AddressData>()?.ToTable(nameof(Addresses), s);
         }
 
     }

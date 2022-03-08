@@ -1,0 +1,8 @@
+﻿@model ABC.Pages.AddressesPage
+@using ABC.Pages.Extensions
+
+@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Street)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Item.City)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Region)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Item.ZipCode)
+@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Country)

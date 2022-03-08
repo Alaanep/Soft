@@ -1,0 +1,8 @@
+﻿@model ABC.Pages.AddressesPage;
+@using ABC.Pages.Extensions
+
+@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Street)
+@MyEditorForHtml.MyEditorFor(Html, m => m.Item.City)
+@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Region)
+@MyEditorForHtml.MyEditorFor(Html, m => m.Item.ZipCode)
+@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Country)
