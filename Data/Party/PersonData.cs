@@ -1,7 +1,7 @@
 ﻿
 namespace ABC.Data.Party
 {
-    public class PersonData: EntityData
+    public sealed class PersonData: EntityData
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

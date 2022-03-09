@@ -4,13 +4,13 @@ using ABC.Aids;
 
 namespace ABC.Tests;
 
-public abstract class BaseTests<Tclass>: IsTypeTested where Tclass: class, new()
-{
-    protected Tclass obj;
-    protected  BaseTests()=>obj=new Tclass();//genereerib abstraktselt Tclass objekti
+public abstract class BaseTests: IsTypeTested {
+    protected object obj;
+    protected  BaseTests()=>obj=createObj();
 
-    protected void isProperty<T>(T? value = default, bool isReadOnly = false)
-    {
+    protected abstract object createObj();
+
+    protected void isProperty<T>(T? value = default, bool isReadOnly = false) {
         var memberName = getCallingMember(nameof(isProperty)).Replace("Test", string.Empty);
         var propertyInfo = obj.GetType().GetProperty(memberName);
         isNotNull(propertyInfo);
@@ -23,16 +23,14 @@ public abstract class BaseTests<Tclass>: IsTypeTested where Tclass: class, new()
 
     private static bool isNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;//kas T tüüp on oma vaikeväärtusega võrdne
 
-    private static bool canWrite(PropertyInfo i, bool isReadOnly)
-    {
+    private static bool canWrite(PropertyInfo i, bool isReadOnly) {
         var canWrite = i?.CanWrite??false;
         areEqual(canWrite, !isReadOnly);
         return canWrite;
     }
     private static T random<T>() => GetRandom.Value<T>();
 
-    private static string getCallingMember(string memberName)
-    {
+    private static string getCallingMember(string memberName) {
         var s = new StackTrace();
         var isNext = false;
         for (var i = 0; i < s.FrameCount - 1; i++)

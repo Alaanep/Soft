@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ABC.Tests.Facade.Party
 {   
     [TestClass]
-    public class PersonViewTests: BaseTests<PersonView>
+    public class PersonViewTests: SealedClassTests<PersonView>
     {
         [TestMethod] public void IdTest() => isProperty<string>();
         [TestMethod] public void FirstNameTest() => isProperty<string?>();

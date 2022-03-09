@@ -8,7 +8,7 @@ using DateTime = System.DateTime;
 namespace ABC.Tests.Data.Party
 {   
     [TestClass]
-    public class PersonDataTests: BaseTests<PersonData>
+    public class PersonDataTests: SealedClassTests<PersonData>
     {
         [TestMethod] public void IdTest() => isProperty<string>();
         [TestMethod] public void FirstNameTest() => isProperty<string?>();

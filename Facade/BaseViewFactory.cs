@@ -4,11 +4,13 @@ using ABC.Domain;
 
 namespace ABC.Facade;
 
-public abstract class BaseViewFactory<TView, TEntity, TData>
+public abstract  class BaseViewFactory<TView, TEntity, TData>
     where TView: class, new()
     where TData: EntityData, new()
-    where TEntity: Entity<TData> {
+    where TEntity: Entity<TData>
+{
     protected abstract TEntity toEntity(TData d);
+
     protected virtual void copy(object? from, object? to) {
         var tFrom = from?.GetType();
         var tTo = to?.GetType();
