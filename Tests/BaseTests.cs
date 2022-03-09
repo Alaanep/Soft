@@ -9,7 +9,7 @@ public abstract class BaseTests<Tclass>: IsTypeTested where Tclass: class, new()
     protected Tclass obj;
     protected  BaseTests()=>obj=new Tclass();//genereerib abstraktselt Tclass objekti
 
-    protected void isProperty<T>(T value = default, bool isReadOnly = false)
+    protected void isProperty<T>(T? value = default, bool isReadOnly = false)
     {
         var memberName = getCallingMember(nameof(isProperty)).Replace("Test", string.Empty);
         var propertyInfo = obj.GetType().GetProperty(memberName);
@@ -31,7 +31,7 @@ public abstract class BaseTests<Tclass>: IsTypeTested where Tclass: class, new()
     }
     private static T random<T>() => GetRandom.Value<T>();
 
-    private string getCallingMember(string memberName)
+    private static string getCallingMember(string memberName)
     {
         var s = new StackTrace();
         var isNext = false;

@@ -4,10 +4,10 @@ namespace ABC.Domain.Party {
     public class Person : Entity<PersonData> { 
         public Person() : this(new PersonData()) { }
         public Person(PersonData d): base(d){}
-        public string FirstName => Data?.FirstName ?? defaultStr;
-        public string LastName => Data?.LastName ?? defaultStr;
-        public bool Gender => Data?.Gender ?? defaultGender;
-        public DateTime Dob => Data?.Dob ?? defaultDate;
+        public string FirstName => getValue(Data?.FirstName);
+        public string LastName => getValue(Data?.LastName);
+        public bool Gender => getValue(Data?.Gender);
+        public DateTime Dob => getValue(Data?.Dob);
         public override string ToString() => $"{FirstName} {LastName} {Gender} {Dob}";
     }
 }

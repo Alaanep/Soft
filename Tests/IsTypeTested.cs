@@ -35,12 +35,12 @@ public class IsTypeTested: TestAsserts
         reportNotAllIsTested();
     }
 
-    private string? getName(object o) => Types.GetName(o?.GetType());
+    private static string? getName(object o) => Types.GetName(o?.GetType());
     private static string? removeTestsTagFrom(string? nameOfTests) =>
         nameOfTests?.Remove("Tests")?.Remove("Test")?.Replace("..", ".");
     private static string? getNamespace(object o) => GetNameSpace.OfType(o);
 
-    private static Assembly? getAssembly(string name) {
+    private static Assembly? getAssembly(string? name) {
         while (!string.IsNullOrWhiteSpace(name)) { 
             var a = GetAssembly.ByName(name);
             if (a is not null) return a;

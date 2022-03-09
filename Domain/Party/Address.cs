@@ -4,11 +4,11 @@ namespace ABC.Domain.Party {
     public sealed class Address: Entity<AddressData> {
         public Address() : this(new AddressData()) { }
         public Address(AddressData d) : base(d) { }
-        public string Street => Data?.Street ?? defaultStr;
-        public string City => Data?.City ?? defaultStr;
-        public string Region => Data?.Region ?? defaultStr;
-        public string ZipCode => Data?.ZipCode ?? defaultStr;
-        public string Country => Data?.Country ?? defaultStr;
+        public string Street => getValue(Data?.Street);
+        public string City => getValue(Data?.City); 
+        public string Region => getValue(Data?.Region);
+        public string ZipCode => getValue(Data?.ZipCode);
+        public string Country => getValue(Data?.Country);
         public override string ToString() => $"{Street} {City} {ZipCode} {Country}";
     }
 }

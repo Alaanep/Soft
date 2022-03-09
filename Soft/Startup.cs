@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Soft.Data;
 using ABC.Domain.Party;
+using ABC.Infra;
 using ABC.Infra.Party;
 
 namespace Soft
@@ -45,7 +46,7 @@ namespace Soft
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
             }
             else
             {
