@@ -19,7 +19,7 @@ namespace ABC.Facade.Party
         public override PersonView Create(Person? e)
         {
             var v = base.Create(e);
-            v.FullName = e.ToString();
+            v.FullName = e?.ToString();
             return v;
         }
     }

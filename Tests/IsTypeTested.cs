@@ -67,7 +67,7 @@ public class IsTypeTested: TestAsserts
         t?.Method(methodName).HasAttribute<TestMethodAttribute>() ?? false;
     private static bool isCorrectlyInherited(Type x) => x.IsInherited(typeof(IsTypeTested));
     private void removeNotNeedTesting() => membersOfType?.Remove(x => !isTypeToBeTested(x));
-    private static bool isTypeToBeTested(string x) => x?.IsRealTypeName() ?? false;
+    private static bool isTypeToBeTested(string x) => x?.IsTypeName() ?? false;
     private void removeTested() => membersOfType?.Remove(x => isItTested(x));
     private bool isItTested(string x) => membersOfTest?.ContainsItem(y => isTestFor(y, x)) ?? false;
     private static bool isTestFor(string testingMember, string memberToBeTested) =>
