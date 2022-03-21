@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using ABC.Aids;
+using ABC.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids;
@@ -24,9 +27,16 @@ namespace ABC.Tests.Aids;
     [DataRow(int.MaxValue - 100, int.MaxValue)]
     [DataRow(int.MinValue, int.MinValue+100)]
     [DataRow(1000, -1000)]
-    [TestMethod] public void Int32Test(int min, int max) {
-        test(min, max);
-    }
+    [TestMethod] public void Int32Test(int min, int max)=>test(min, max);
+
+    [DataRow(-1000L, 1000L)]
+    [DataRow(-1000L, 0L)]
+    [DataRow(0L, 1000L)]
+    [DataRow(long.MaxValue - 1000L, long.MaxValue)]
+    [DataRow(long.MinValue, long.MinValue + 1000L)]
+    [DataRow(1000L, -1000L)]
+    [TestMethod] public void Int64Test(long min, long max) => test(min, max);
+
 
     [DataRow(-1000.0, 1000.0)]
     [DataRow(-1000.0, 0)]
@@ -34,12 +44,50 @@ namespace ABC.Tests.Aids;
     [DataRow(double.MaxValue - 1.0E+308, double.MaxValue)]
     [DataRow(double.MinValue, double.MinValue + 1.0E+308)]
     [DataRow(1000.0, -1000.0)]
-    [TestMethod] public void DoubleTest(double min, double max) {
-        test(min, max);
+    [TestMethod] public void DoubleTest(double min, double max)=>test(min, max);
+    
+    [DataRow(char.MinValue, char.MaxValue)]
+    [DataRow('a', 'z')]
+    [DataRow('1', 'P')]
+    [DataRow('A', 'Z')]
+    [TestMethod] public void CharTest(char min, char max)=>test(min, max);
+
+    [TestMethod] public void BoolTest() {
+        var x = GetRandom.Bool();
+        var y = GetRandom.Bool();
+        var i = 0;
+        while (x==y){
+            y = GetRandom.Bool();
+            if(i==5) areNotEqual(x,y);
+            i++;
+        }
     }
-    [TestMethod] public void CharTest() => isInconclusive();
-    [TestMethod] public void BoolTest() => isInconclusive();
-    [TestMethod] public void DateTimeTest() => isInconclusive();
-    [TestMethod] public void StringTest() => isInconclusive();
-    [TestMethod] public void ValueTest() => isInconclusive();
+
+    [DynamicData(nameof(DateTimeValues), DynamicDataSourceType.Method)]
+    [TestMethod] public void DateTimeTest(DateTime min, DateTime max) => test(min, max);
+
+    private static IEnumerable<object[]> DateTimeValues() => new List<object[]>()
+    {
+        new object[]{DateTime.Now.AddYears(-100), DateTime.Now.AddYears(100)},
+        new object[]{DateTime.Now.AddYears(100), DateTime.Now.AddYears(-100)},
+        new object[]{ DateTime.MaxValue.AddYears(-100), DateTime.MaxValue },
+        new object[]{ DateTime.MinValue, DateTime.MinValue.AddYears(100) }
+    };
+
+    [TestMethod] public void StringTest() {
+        var x = GetRandom.Value<string>();
+        var y = GetRandom.Value<string>();
+        areNotEqual(x, y);
+        isInstanceOfType(x, typeof(string));
+        isInstanceOfType(y, typeof(string));
+    }
+    [TestMethod] public void ValueTest() {
+        var x = GetRandom.Value<PersonData>() as PersonData;
+        var y = GetRandom.Value<PersonData>() as PersonData;
+        areNotEqual(x.Id, y.Id, nameof(x.Id));
+        areNotEqual(x.FirstName, y.FirstName, nameof(x.FirstName));
+        areNotEqual(x.LastName, y.LastName, nameof(x.LastName));
+        //areNotEqual(x.Gender, y.Gender, nameof(x.Gender));
+        areNotEqual(x.Dob, y.Dob, nameof(x.Dob));
+    }
 }

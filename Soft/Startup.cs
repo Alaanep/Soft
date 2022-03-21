@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Soft.Data;
 using ABC.Domain.Party;
 using ABC.Infra;
+using ABC.Infra.Initializers;
 using ABC.Infra.Party;
 
 namespace Soft
@@ -53,6 +54,15 @@ namespace Soft
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var abcDb = scope.ServiceProvider.GetService<ABCDb>();
+                abcDb?.Database?.EnsureCreated();
+                new AddressesInitializer(abcDb).Init();
+                new PersonsInitializer(abcDb).Init();
+
             }
 
             app.UseHttpsRedirection();
