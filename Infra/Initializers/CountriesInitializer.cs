@@ -3,12 +3,12 @@ using ABC.Data.Party;
 
 namespace ABC.Infra.Initializers;
 
+
 public sealed class CountriesInitializer : BaseInitializer<CountryData> {
     public CountriesInitializer(ABCDb? db) : base(db, db?.Countries) { }
 
     protected override IEnumerable<CountryData> getEntities {
-        get
-        {
+        get {
             var l = new List<CountryData>();
             foreach (CultureInfo cul in CultureInfo.GetCultures(CultureTypes.SpecificCultures)) {
                 var country = new RegionInfo(new CultureInfo(cul.Name, false).LCID);
@@ -22,5 +22,9 @@ public sealed class CountriesInitializer : BaseInitializer<CountryData> {
     }
 
     internal static CountryData greateCountry(string code, string name, string description) => new CountryData() {
-        Id = code, Code = code, Name = name, Description = description};
+        Id = code,
+        Code = code,
+        Name = name,
+        Description = description
+    };
 }

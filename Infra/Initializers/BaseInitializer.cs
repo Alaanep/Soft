@@ -26,5 +26,6 @@ public static class AbcInitializer {
         new AddressesInitializer(abcDb).Init();
         new PersonsInitializer(abcDb).Init();
         new CountriesInitializer(abcDb).Init();
+        new CurrenciesInitalizer(abcDb).Init();
     }
 }
