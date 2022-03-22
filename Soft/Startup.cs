@@ -60,8 +60,8 @@ namespace Soft
             {
                 var abcDb = scope.ServiceProvider.GetService<ABCDb>();
                 abcDb?.Database?.EnsureCreated();
-                new AddressesInitializer(abcDb).Init();
-                new PersonsInitializer(abcDb).Init();
+                AbcInitializer.Init(abcDb);
+               
 
             }
 
