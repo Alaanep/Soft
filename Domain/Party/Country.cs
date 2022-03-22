@@ -1,7 +1,6 @@
 ﻿using ABC.Data.Party;
 
-namespace ABC.Domain.Party
-{
+namespace ABC.Domain.Party {
     public sealed class Country : Entity<CountryData> {
         public Country() : this(new CountryData()) { }
         public Country(CountryData d) : base(d) {}
