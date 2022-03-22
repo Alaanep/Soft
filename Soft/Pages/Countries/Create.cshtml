@@ -1,0 +1,14 @@
+﻿@page
+@model ABC.Pages.CountriesPage;
+@using ABC.Pages.Extensions
+
+@{
+
+    Layout = "_Create";
+}
+<body>
+    @MyEditorForHtml.MyEditorFor(Html, m => m.Item.Id)
+    <partial name="_EditCountry"/>
+
+</body>
+

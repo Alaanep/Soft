@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ABC.Data.Party {
 
-namespace ABC.Data.Party { 
-    
     public sealed class CountryData: EntityData {
         public string? Name { get; set; }
         public string? Description { get; set; }

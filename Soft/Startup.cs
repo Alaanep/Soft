@@ -38,6 +38,7 @@ namespace Soft
 
             services.AddTransient<IPersonsRepo, PersonsRepo>();
             services.AddTransient<IAddressRepo, AddressRepo>();
+            services.AddTransient<ICountryRepo, CountryRepo>();
 
         }
 
