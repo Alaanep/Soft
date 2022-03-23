@@ -7,13 +7,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ABC.Tests.Facade.Party {
     [TestClass]
     public class PersonViewFactoryTests : SealedClassTests<PersonView> {
-        [TestMethod]
-        public void CreateTest() {
+        [TestMethod] public void CreateTest() { }
 
-        }
-
-        [TestMethod]
-        public void CreateViewTest() {
+        [TestMethod] public void CreateViewTest() {
             var d = GetRandom.Value<PersonData>();
             var e = new Person(d);
             var v = new PersonViewFactory().Create(e);
@@ -27,8 +23,7 @@ namespace ABC.Tests.Facade.Party {
             areEqual(v.Dob, e.Dob);
             areEqual(v.FullName, e.ToString());
         }
-        [TestMethod]
-        public void CreateEntityTest() {
+        [TestMethod] public void CreateEntityTest() {
             var v = GetRandom.Value<PersonView>();
             var e = new PersonViewFactory().Create(v);
             isNotNull(e);

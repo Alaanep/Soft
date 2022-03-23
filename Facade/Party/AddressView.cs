@@ -14,4 +14,9 @@ public sealed class AddressView : BaseView {
 }
 public sealed class AddressViewFactory : BaseViewFactory<AddressView, Address, AddressData> {
     protected override Address toEntity(AddressData d) => new(d);
+    public override AddressView Create(Address? e) {
+        var v = base.Create(e);
+        v.FullName = e?.ToString();
+        return v;
+    }
 }
