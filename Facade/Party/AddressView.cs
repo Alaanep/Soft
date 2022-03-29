@@ -4,7 +4,7 @@ using ABC.Domain.Party;
 
 namespace ABC.Facade.Party;
 
-public sealed class AddressView : BaseView {
+public sealed class AddressView : UniqueView {
     [DisplayName("Street")] public string? Street { get; set; }
     [DisplayName("City")] public string? City { get; set; }
     [DisplayName("Region")] public string? Region { get; set; }

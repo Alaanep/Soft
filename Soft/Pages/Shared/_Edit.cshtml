@@ -16,13 +16,14 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     @RenderBody()
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary"/>
+        <input type="submit" value="Save" class="btn btn-primary"/> 
+        <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
     </div>
 </form>
 
 
 <div>
-    <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+    
 </div>
 
 @section Scripts {

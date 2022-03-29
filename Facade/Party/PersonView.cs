@@ -5,7 +5,7 @@ using ABC.Domain.Party;
 
 namespace ABC.Facade.Party
 {
-    public sealed class PersonView: BaseView
+    public sealed class PersonView: UniqueView
     {
         [DisplayName("First Name")]public string? FirstName { get; set; }
         [DisplayName("Last Name")]public string? LastName { get; set; }

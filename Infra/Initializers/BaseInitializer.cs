@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ABC.Infra.Initializers;
 
-public abstract class BaseInitializer<TData> where TData: EntityData {
+public abstract class BaseInitializer<TData> where TData: UniqueData {
     protected internal DbContext? database;
     protected internal DbSet<TData>? dbSet;
 
@@ -19,6 +19,7 @@ public abstract class BaseInitializer<TData> where TData: EntityData {
     }
 
     protected abstract IEnumerable<TData> getEntities{ get; }
+    internal static bool isCorrectIsoCode(string id) => string.IsNullOrWhiteSpace(id) ? false : char.IsLetter(id[0]);
 }
 
 public static class AbcInitializer {

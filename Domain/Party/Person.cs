@@ -1,7 +1,7 @@
 ﻿using ABC.Data.Party;
 
 namespace ABC.Domain.Party {
-    public class Person : Entity<PersonData> { 
+    public class Person : UniqueEntity<PersonData> { 
         public Person() : this(new PersonData()) { }
         public Person(PersonData d): base(d){}
         public string FirstName => getValue(Data?.FirstName);
