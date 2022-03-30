@@ -10,7 +10,7 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
     where TEntity: UniqueEntity
     where TRepo: IBaseRepo<TEntity> {
         
-    private readonly TRepo repo;
+    protected readonly TRepo repo;
     protected abstract TView toView(TEntity? entity);
     protected abstract TEntity toObject(TView? item);
     [BindProperty] public TView? Item { get; set; }
@@ -49,7 +49,7 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
         return RedirectToPage("./Index", "Index");
     }
 
-    public async Task<IActionResult> OnGetIndexAsync() {
+    public virtual async Task<IActionResult> OnGetIndexAsync(int pageIndex=0, string currentFilter=null, string sortOrder =null) {
         var list = await repo.GetAsync();
         Items = new List<TView>();
         foreach (var obj in list) {

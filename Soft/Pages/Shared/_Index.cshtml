@@ -1,10 +1,11 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    var firstDisabled = false;
-    var prevDisabled = false;
-    var nextDisabled = false;
-    var lastDisabled = false;
+    var firstDisabled = (Model.PageIndex!=0)? "": "disabled";
+    var prevDisabled =  (Model.HasPreviousPage)? "": "disabled" ;
+    var nextDisabled = (Model.HasNextPage) ? "": "disabled";
+    var lastDisabled = (Model.PageIndex!=Model.TotalPages-1)? "": "disabled";
+    var showMessage = $"Page {Model.PageIndex+1} of total pages {Model.TotalPages}";
     Layout = "_Layout";
 }
 
@@ -19,40 +20,40 @@
         <p>
             Find by name:&nbsp
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />&nbsp
-            <input type="submit" value="Search" class="btn btn-primary" />&nbsp
-            <a asp-page="./Index">Back to full List</a>
+            <input type="submit" value="Search" class="btn btn-primary" disabled />&nbsp
+            <a asp-page="Index" asp-page-handler="Index">Back to full List</a>
         </p>
     </div>
 </form>
 @RenderBody()
 <div>
-    <a asp-page="./Index"
+    <a asp-page="Index" asp-page-handler="Index"
        asp-route-sortOrder="@Model.CurrentSort"
        asp-route-pageIndex="0"
        asp-route-currentFilter="@Model.CurrentFilter"
        class="btn btn-primary @firstDisabled">
         First
     </a>&nbsp
-    <a asp-page="./Index"
+    <a asp-page="Index" asp-page-handler="Index"
        asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.PageIndex + 1)"
+       asp-route-pageIndex="@(Model.PageIndex -1)"
        asp-route-currentFilter="@Model.CurrentFilter"
        class="btn btn-primary @prevDisabled">
         Previous
     </a>&nbsp
     
-       Page 1 of total 20&nbsp
+       @showMessage&nbsp
 
-    <a asp-page="./Index"
+    <a asp-page="Index" asp-page-handler="Index"
        asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.PageIndex - 1)"
+       asp-route-pageIndex="@(Model.PageIndex + 1)"
        asp-route-currentFilter="@Model.CurrentFilter"
        class="btn btn-primary @nextDisabled">
         Next
     </a>&nbsp
-    <a asp-page="./Index"
+    <a asp-page="Index" asp-page-handler="Index"
        asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.PagesCount-1)"
+       asp-route-pageIndex="@(Model.TotalPages-1)"
        asp-route-currentFilter="@Model.CurrentFilter"
        class="btn btn-primary @lastDisabled">
         Last

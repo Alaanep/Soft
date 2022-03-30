@@ -40,7 +40,9 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData> where 
     }
     public override async Task<List<TDomain>> GetAsync() {
         try {
-            var list = (set is null) ? new List<TData>() : await set.ToListAsync();
+            //var list = (set is null) ? new List<TData>() : await set.ToListAsync();
+            var query = createSql();
+            var list = await runSql(query);
             var items = new List<TDomain>();
             foreach (var d in list) {
                 var obj = toDomain(d);
@@ -49,6 +51,11 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData> where 
             return items;
         } catch { return new List<TDomain>(); }
     }
+
+    internal async Task<List<TData>> runSql(IQueryable<TData> query)=> await query.AsNoTracking().ToListAsync();//systeem ei jalgi muudatusi
+
+    internal protected virtual IQueryable<TData> createSql()=> from s in set select s;
+    
     public override bool Update(TDomain obj) => UpdateAsync(obj).GetAwaiter().GetResult();
     public override async Task<bool> UpdateAsync(TDomain obj) {
         try {
