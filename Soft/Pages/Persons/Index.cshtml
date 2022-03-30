@@ -1,15 +1,11 @@
 ﻿@page
-@model ABC.Pages.PersonsPage;
+@model ABC.Pages.Party.PersonsPage;
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create" asp-page-handler="Create">Create New</a>
-</p>
+<body>
 <table class="table">
     <thead>
     <tr>
@@ -50,11 +46,12 @@
             @Html.DisplayFor(modelItem => item.Dob)
         </td>
         <td>
-            <a asp-page="./Edit" asp-page-handler="Edit" asp-route-id="@item.Id">Edit</a>  
-            <a asp-page="./Details" asp-page-handler="Details" asp-route-id="@item.Id">Details</a>  
+            <a asp-page="./Edit" asp-page-handler="Edit" asp-route-id="@item.Id">Edit</a>&nbsp
+            <a asp-page="./Details" asp-page-handler="Details" asp-route-id="@item.Id">Details</a>&nbsp 
             <a asp-page="./Delete" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a> 
         </td>
     </tr>
 }
     </tbody>
 </table>
+</body>
