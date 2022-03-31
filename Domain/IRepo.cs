@@ -3,8 +3,7 @@ namespace ABC.Domain
 {
     public interface IRepo<T> : IPagedRepo<T> where T: UniqueEntity{}
 
-    public interface IPagedRepo<T> : IOrderedRepo<T> where T : UniqueEntity
-    {
+    public interface IPagedRepo<T> : IOrderedRepo<T> where T : UniqueEntity {
         public int PageIndex { get; set; }
         public int TotalPages { get; }
         public bool HasNextPage { get; }
@@ -12,12 +11,13 @@ namespace ABC.Domain
         public int PageSize { get; set; }
     }
     public interface IOrderedRepo<T> : IFilteredRepo<T> where T : UniqueEntity { }
-    public interface IFilteredRepo<T> : ICrudRepo<T> where T : UniqueEntity { }
+
+    public interface IFilteredRepo<T> : ICrudRepo<T> where T : UniqueEntity {
+        public string CurrentFilter { get; set; }
+    }
     public interface ICrudRepo<T> : IBaseRepo<T> where T : UniqueEntity { }
 
-
-    public interface IBaseRepo<T> where T: UniqueEntity
-    {
+    public interface IBaseRepo<T> where T: UniqueEntity {
         //crud
         bool Add(T obj);
         T Get(string id);

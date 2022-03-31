@@ -20,22 +20,23 @@
     >Create New</a>
 </p>
 
-<form asp-page="./Index" 
-      method="get" 
+<form method="get"
+      asp-page="Index"
       asp-route-sortOrder="@Model.CurrentSort"
       asp-route-pageIndex="@Model.PageIndex"
-      asp-route-currentFilter="@Model.CurrentFilter">
+      >
+    <input type="hidden" name="handler" value="Index"/>
     <div class="form-actions no-color">
         <p>
             Find by name:&nbsp
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />&nbsp
-            <input type="submit" value="Search" class="btn btn-primary" disabled />&nbsp
+            <input type="text" name="currentFilter" value="@Model.CurrentFilter"/>&nbsp
+            <input type="submit" value="Search" class="btn btn-primary"/>&nbsp
             <a asp-page="Index"
                asp-page-handler="Index"
                asp-route-sortOrder="@Model.CurrentSort"
                asp-route-pageIndex="@Model.PageIndex"
-               asp-route-currentFilter="@Model.CurrentFilter"
-             >Back to full List</a>
+               asp-route-currentFilter=""
+            >Back to full List</a>
         </p>
     </div>
 </form>
