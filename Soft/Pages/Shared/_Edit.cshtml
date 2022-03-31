@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Edit";
     ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
     Layout = "_Layout";
@@ -11,20 +9,22 @@
 <h4>@ViewData["SubTitle"]</h4>
 <hr />
 
-
-<form method="post" asp-page-handler="Edit">
+<form method="post" 
+      asp-page-handler="Edit" 
+      asp-route-sortOrder="@Model.CurrentSort"
+      asp-route-pageIndex="@Model.PageIndex"
+      asp-route-currentFilter="@Model.CurrentFilter">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     @RenderBody()
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary"/> 
-        <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+        <a asp-page="Index" asp-page-handler="Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@Model.PageIndex"
+           asp-route-currentFilter="@Model.CurrentFilter"
+        >Back to List</a>
     </div>
 </form>
-
-
-<div>
-    
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

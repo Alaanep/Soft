@@ -15,6 +15,14 @@
     @RenderBody()
 </div>
 <div>
-    <a asp-page="./Edit" asp-page-handler="Edit" asp-route-id="@itemId">Edit</a>  
-    <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+    <a asp-page="./Edit" asp-page-handler="Edit"
+       asp-route-id="@itemId"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@Model.PageIndex"
+       asp-route-currentFilter="@Model.CurrentFilter">Edit</a>  
+
+    <a asp-page="Index" asp-page-handler="Index"
+       asp-route-sortOrder="@Model.CurrentSort"
+       asp-route-pageIndex="@Model.PageIndex"
+       asp-route-currentFilter="@Model.CurrentFilter">Back to List</a>
 </div>

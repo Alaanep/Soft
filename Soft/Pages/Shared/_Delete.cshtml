@@ -15,9 +15,17 @@
     <hr />
     @RenderBody()
     
-    <form method="post">
+    <form method="post" 
+          asp-route-id="@itemId"
+          asp-page-handler="Delete"
+          asp-route-sortOrder="@Model.CurrentSort"
+          asp-route-pageIndex="@Model.PageIndex"
+          asp-route-currentFilter="@Model.CurrentFilter">
         <input type="hidden" asp-for-id="@itemId" />
-        <input type="submit" value="Delete" handler="Delete" class="btn btn-danger" />  
-        <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />  
+        <a asp-page="Index" asp-page-handler="Index"
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@Model.PageIndex"
+           asp-route-currentFilter="@Model.CurrentFilter">Back to List</a>
     </form>
 </div>

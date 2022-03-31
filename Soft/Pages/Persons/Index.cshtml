@@ -46,9 +46,29 @@
             @Html.DisplayFor(modelItem => item.Dob)
         </td>
         <td>
-            <a asp-page="./Edit" asp-page-handler="Edit" asp-route-id="@item.Id">Edit</a>&nbsp
-            <a asp-page="./Details" asp-page-handler="Details" asp-route-id="@item.Id">Details</a>&nbsp 
-            <a asp-page="./Delete" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a> 
+            <a asp-page="./Edit"
+               asp-page-handler="Edit" 
+               asp-route-id="@item.Id"
+               asp-route-sortOrder="@Model.CurrentSort"
+               asp-route-pageIndex="@Model.PageIndex"
+               asp-route-currentFilter="@Model.CurrentFilter"
+            >Edit</a>&nbsp 
+
+            <a asp-page="./Details"
+               asp-page-handler="Details"
+               asp-route-id="@item.Id" 
+               asp-route-sortOrder="@Model.CurrentSort"
+               asp-route-pageIndex="@Model.PageIndex"
+               asp-route-currentFilter="@Model.CurrentFilter"
+            >Details</a>&nbsp 
+
+            <a asp-page="./Delete" 
+               asp-page-handler="Delete" 
+               asp-route-id="@item.Id"
+               asp-route-sortOrder="@Model.CurrentSort"
+               asp-route-pageIndex="@Model.PageIndex"
+               asp-route-currentFilter="@Model.CurrentFilter"
+            >Delete</a>
         </td>
     </tr>
 }

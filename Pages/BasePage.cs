@@ -18,38 +18,51 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
     public string ItemId => Item?.Id ?? string.Empty;
     public BasePage(TRepo r) => repo = r;
 
-    public IActionResult OnGetCreate() => Page();
-    public async Task<IActionResult> OnPostCreateAsync() {
+    public virtual IActionResult  OnGetCreate(int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) => Page();
+    public virtual async Task<IActionResult> OnPostCreateAsync(int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
         if (!ModelState.IsValid) return Page();
         await repo.AddAsync(toObject(Item));
-        return RedirectToPage("./Index", "Index");
+        return RedirectToPage("./Index", "Index", new {
+            pageIndex = pageIndex,
+            currentFilter = currentFilter,
+            sortOrder = sortOrder
+        });
     }
-    public async Task<IActionResult> OnGetDetailsAsync(string id) {
+    public virtual async Task<IActionResult> OnGetDetailsAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
         Item = await getItem(id);
         return Item == null ? NotFound() : Page();
     }
-    public async Task<IActionResult> OnGetDeleteAsync(string id) {
+    public virtual async Task<IActionResult> OnGetDeleteAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
         Item = await getItem(id);
         return Item == null ? NotFound() : Page();
     }
-    public async Task<IActionResult> OnPostDeleteAsync(string id) {
+    public virtual async Task<IActionResult> OnPostDeleteAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
         if (id == null) return NotFound();
         await repo.DeleteAsync(id);
-        return RedirectToPage("./Index", "Index");
+        return RedirectToPage("./Index", "Index", new {
+            pageIndex = pageIndex,
+            currentFilter = currentFilter,
+            sortOrder = sortOrder
+        });
     }
-    public async Task<IActionResult> OnGetEditAsync(string id) {
+    public virtual async Task<IActionResult> OnGetEditAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
         Item = await getItem(id);
         return Item == null ? NotFound() : Page();
     }
-    public async Task<IActionResult> OnPostEditAsync() {
+    public virtual async Task<IActionResult> OnPostEditAsync(int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
         if (!ModelState.IsValid) return Page();
         var obj = toObject(Item);
         var updated = await repo.UpdateAsync(obj);
         if (!updated) return NotFound();
-        return RedirectToPage("./Index", "Index");
+        return RedirectToPage("./Index", "Index", new
+        {
+            pageIndex=pageIndex,
+            currentFilter=currentFilter,
+            sortOrder=sortOrder
+        });
     }
 
-    public virtual async Task<IActionResult> OnGetIndexAsync(int pageIndex=0, string currentFilter=null, string sortOrder =null) {
+    public virtual async Task<IActionResult> OnGetIndexAsync(int pageIndex=0, string? currentFilter=null, string? sortOrder =null) {
         var list = await repo.GetAsync();
         Items = new List<TView>();
         foreach (var obj in list) {
