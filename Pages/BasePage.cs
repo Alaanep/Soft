@@ -1,4 +1,5 @@
-﻿using ABC.Domain;
+﻿using ABC.Aids;
+using ABC.Domain;
 using ABC.Facade;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,63 +14,58 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
     protected readonly TRepo repo;
     protected abstract TView toView(TEntity? entity);
     protected abstract TEntity toObject(TView? item);
+    protected abstract IActionResult redirectToIndex();
     [BindProperty] public TView? Item { get; set; }
     public IList<TView>? Items { get; set; }
     public string ItemId => Item?.Id ?? string.Empty;
     public BasePage(TRepo r) => repo = r;
-
-    public virtual IActionResult  OnGetCreate(int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) => Page();
-    public virtual async Task<IActionResult> OnPostCreateAsync(int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
-        if (!ModelState.IsValid) return Page();
-        await repo.AddAsync(toObject(Item));
-        return RedirectToPage("./Index", "Index", new {
-            pageIndex = pageIndex,
-            currentFilter = currentFilter,
-            sortOrder = sortOrder
-        });
-    }
-    public virtual async Task<IActionResult> OnGetDetailsAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
-        Item = await getItem(id);
-        return Item == null ? NotFound() : Page();
-    }
-    public virtual async Task<IActionResult> OnGetDeleteAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
-        Item = await getItem(id);
-        return Item == null ? NotFound() : Page();
-    }
-    public virtual async Task<IActionResult> OnPostDeleteAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
-        if (id == null) return NotFound();
-        await repo.DeleteAsync(id);
-        return RedirectToPage("./Index", "Index", new {
-            pageIndex = pageIndex,
-            currentFilter = currentFilter,
-            sortOrder = sortOrder
-        });
-    }
-    public virtual async Task<IActionResult> OnGetEditAsync(string id, int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
-        Item = await getItem(id);
-        return Item == null ? NotFound() : Page();
-    }
-    public virtual async Task<IActionResult> OnPostEditAsync(int pageIndex = 0, string? currentFilter = null, string? sortOrder = null) {
-        if (!ModelState.IsValid) return Page();
-        var obj = toObject(Item);
-        var updated = await repo.UpdateAsync(obj);
-        if (!updated) return NotFound();
-        return RedirectToPage("./Index", "Index", new
-        {
-            pageIndex=pageIndex,
-            currentFilter=currentFilter,
-            sortOrder=sortOrder
-        });
+    protected abstract void setAttributes(int idx, string? filter, string? order);
+    internal virtual void removeKey(params string[] keys) {
+        foreach (var key in keys ?? Array.Empty<string>())
+            Safe.Run(() => ModelState.Remove(key));
     }
 
-    public virtual async Task<IActionResult> OnGetIndexAsync(int pageIndex=0, string? currentFilter=null, string? sortOrder =null) {
-        var list = await repo.GetAsync();
-        Items = new List<TView>();
-        foreach (var obj in list) {
-            var v = toView(obj);
-            Items.Add(v);
-        }
-        return Page();
+    protected virtual async Task<IActionResult> perform(Func<Task<IActionResult>> f, int idx, string? filter, string? order,
+        bool removeKeys = false) {
+        setAttributes(idx, filter, order);
+        if(removeKeys) removeKey(nameof(filter), nameof(order));
+        return await f();
     }
-    private async Task<TView> getItem(string id) => toView(await repo.GetAsync(id));
+
+    protected abstract IActionResult getCreate();
+    protected abstract Task<IActionResult> postCreateAsync();
+    protected abstract Task<IActionResult> getDetailsAsync(string id);
+    protected abstract Task<IActionResult> getDeleteAsync(string id);
+    protected abstract Task<IActionResult> postDeleteAsync(string id);
+    protected abstract Task<IActionResult> getEditAsync(string id);
+    protected abstract Task<IActionResult> postEditAsync();
+    protected abstract Task<IActionResult> getIndexAsync();
+
+
+    public IActionResult OnGetCreate(int idx = 0, string? filter = null, string? order = null) {
+        setAttributes(idx, filter, order);
+        return getCreate();
+    }
+
+    public async Task<IActionResult> OnPostCreateAsync(int idx = 0, string? filter = null, string? order = null)
+        => await perform(()=>postCreateAsync(), idx, filter, order, true);
+
+    public async Task<IActionResult> OnGetDetailsAsync(string id, int idx = 0, string? filter = null, string? order = null)
+        => await perform(()=> getDetailsAsync(id), idx, filter, order);
+    
+    public async Task<IActionResult> OnGetDeleteAsync(string id, int idx = 0, string? filter = null, string? order = null)
+        => await perform(() => getDeleteAsync(id), idx, filter, order);
+    
+    public async Task<IActionResult> OnPostDeleteAsync(string id, int idx = 0, string? filter = null, string? order = null)
+        => await perform(()=> postDeleteAsync(id), idx, filter, order) ;
+    
+    public async Task<IActionResult> OnGetEditAsync(string id, int idx = 0, string? filter = null, string? order = null) 
+        =>await perform(()=> getEditAsync(id), idx, filter, order);
+    
+    public async Task<IActionResult> OnPostEditAsync(int idx = 0, string? filter = null, string? order = null)
+        => await perform(()=> postEditAsync(), idx, filter, order, true);
+    
+    public async Task<IActionResult> OnGetIndexAsync(int idx = 0, string? filter = null, string? order = null) 
+        => await perform(()=> getIndexAsync(), idx, filter, order);
+    
 }

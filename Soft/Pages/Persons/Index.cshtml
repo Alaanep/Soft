@@ -49,25 +49,25 @@
             <a asp-page="./Edit"
                asp-page-handler="Edit" 
                asp-route-id="@item.Id"
-               asp-route-sortOrder="@Model.CurrentSort"
-               asp-route-pageIndex="@Model.PageIndex"
-               asp-route-currentFilter="@Model.CurrentFilter"
+               asp-route-order="@Model.CurrentSort"
+               asp-route-idx="@Model.PageIndex"
+               asp-route-filter="@Model.CurrentFilter"
             >Edit</a>&nbsp 
 
             <a asp-page="./Details"
                asp-page-handler="Details"
                asp-route-id="@item.Id" 
-               asp-route-sortOrder="@Model.CurrentSort"
-               asp-route-pageIndex="@Model.PageIndex"
-               asp-route-currentFilter="@Model.CurrentFilter"
+               asp-route-order="@Model.CurrentSort"
+               asp-route-idx="@Model.PageIndex"
+               asp-route-filter="@Model.CurrentFilter"
             >Details</a>&nbsp 
 
             <a asp-page="./Delete" 
                asp-page-handler="Delete" 
                asp-route-id="@item.Id"
-               asp-route-sortOrder="@Model.CurrentSort"
-               asp-route-pageIndex="@Model.PageIndex"
-               asp-route-currentFilter="@Model.CurrentFilter"
+               asp-route-order="@Model.CurrentSort"
+               asp-route-idx="@Model.PageIndex"
+               asp-route-filter="@Model.CurrentFilter"
             >Delete</a>
         </td>
     </tr>
