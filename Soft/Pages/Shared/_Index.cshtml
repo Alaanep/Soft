@@ -14,7 +14,7 @@
 <p>
     <a asp-page="Create" 
        asp-page-handler="Create" 
-       asp-route-order="@Model.CurrentSort"
+       asp-route-order="@Model.CurrentOrder"
        asp-route-idx="@Model.PageIndex"
        asp-route-filter="@Model.CurrentFilter"
     >Create New</a>
@@ -22,7 +22,7 @@
 
 <form method="get"
       asp-page="Index"
-      asp-route-order="@Model.CurrentSort"
+      asp-route-order="@Model.CurrentOrder"
       asp-route-idx="@Model.PageIndex"
       >
     <input type="hidden" name="handler" value="Index"/>
@@ -33,7 +33,7 @@
             <input type="submit" value="Search" class="btn btn-primary"/>&nbsp
             <a asp-page="Index"
                asp-page-handler="Index"
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@String.Empty"
             >Back to full List</a>
@@ -44,7 +44,7 @@
 <div>
     <a asp-page="Index"
        asp-page-handler="Index"
-       asp-route-order="@Model.CurrentSort"
+       asp-route-order="@Model.CurrentOrder"
        asp-route-idx="0"
        asp-route-filter="@Model.CurrentFilter"
        class="btn btn-primary @firstDisabled"
@@ -52,7 +52,7 @@
 
     <a asp-page="Index" 
        asp-page-handler="Index"
-       asp-route-order="@Model.CurrentSort"
+       asp-route-order="@Model.CurrentOrder"
        asp-route-idx="@(Model.PageIndex -1)"
        asp-route-filter="@Model.CurrentFilter"
        class="btn btn-primary @prevDisabled"
@@ -62,7 +62,7 @@
 
     <a asp-page="Index" 
        asp-page-handler="Index"
-       asp-route-order="@Model.CurrentSort"
+       asp-route-order="@Model.CurrentOrder"
        asp-route-idx="@(Model.PageIndex + 1)"
        asp-route-filter="@Model.CurrentFilter" 
        class="btn btn-primary @nextDisabled"
@@ -70,7 +70,7 @@
 
     <a asp-page="Index"
        asp-page-handler="Index"
-       asp-route-order="@Model.CurrentSort"
+       asp-route-order="@Model.CurrentOrder"
        asp-route-idx="@(Model.TotalPages-1)"
        asp-route-filter="@Model.CurrentFilter"
        class="btn btn-primary @lastDisabled"

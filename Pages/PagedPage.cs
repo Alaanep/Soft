@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ABC.Pages;
 
-public abstract class PagedPage<TView, TEntity, TRepo> : OrderedPage<TView, TEntity, TRepo>
+public abstract class PagedPage<TView, TEntity, TRepo> : OrderedPage<TView, TEntity, TRepo>, IPageModel
     where TView : UniqueView
     where TEntity : UniqueEntity
     where TRepo : IPagedRepo<TEntity> {
@@ -21,12 +21,12 @@ public abstract class PagedPage<TView, TEntity, TRepo> : OrderedPage<TView, TEnt
     protected override void setAttributes(int pageIndex, string? currentFilter, string? sortOrder) {
         PageIndex = pageIndex;
         CurrentFilter = currentFilter;
-        CurrentSort = sortOrder;
+        CurrentOrder = sortOrder;
     }
     protected override IActionResult redirectToIndex()
         => RedirectToPage("./Index", "Index", new {
             pageIndex = PageIndex,
             currentFilter = CurrentFilter,
-            sortOrder = CurrentSort
+            sortOrder = CurrentOrder
         });
 }

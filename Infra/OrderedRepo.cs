@@ -8,40 +8,35 @@ namespace ABC.Infra;
 
 public abstract class OrderedRepo<TDomain, TData> : FilteredRepo<TDomain, TData> where TDomain : UniqueEntity<TData>, new() where TData : UniqueData, new() {
     protected OrderedRepo(DbContext? c, DbSet<TData>? s) : base(c, s) { }
-
-    public string CurrentSort { get; set; }
-    //public string SortOrder { get; set; }
+    public string? CurrentOrder { get; set; }
     public static string DescendingString => "_desc";
-    protected internal override IQueryable<TData> createSql() => addSort(base.createSql());
-
-    internal IQueryable<TData> addSort(IQueryable<TData> q) {
-        if (string.IsNullOrWhiteSpace(CurrentSort)) return q;
-        var e = lambdaExpression;
+    protected internal override IQueryable<TData> createSql() => AddSort(base.createSql());
+    internal IQueryable<TData> AddSort(IQueryable<TData> q) {
+        if (string.IsNullOrWhiteSpace(CurrentOrder)) return q;
+        var e = LambdaExpression;
         if (e == null) return q;
-        if (isDescending) return q.OrderByDescending(e);
+        if (IsDescending) return q.OrderByDescending(e);
         return q.OrderBy(e);
     }
+    internal bool IsDescending => CurrentOrder?.EndsWith(DescendingString) ?? false;
+    internal bool IsSameProperty(string s) => (!string.IsNullOrEmpty(s) && (CurrentOrder?.StartsWith(s) ?? false));
+    internal string PropertyName => CurrentOrder?.Replace(DescendingString, "")?? "";
+    internal PropertyInfo? PropertyInfo => typeof(TData).GetProperty(PropertyName);
 
-    internal bool isDescending => CurrentSort?.EndsWith(DescendingString) ?? false;
-    internal bool isSameProperty(string s) => (string.IsNullOrEmpty(s) ? false : (CurrentSort?.StartsWith(s) ?? false));
-    internal string propertyName => CurrentSort?.Replace(DescendingString, "")?? "";
-    internal PropertyInfo? propertyInfo => typeof(TData).GetProperty(propertyName);
-
-    internal Expression<Func<TData, object>>? lambdaExpression {
+    internal Expression<Func<TData, object>>? LambdaExpression {
         get
         {
-            if (propertyInfo is null) return null;
+            if (PropertyInfo is null) return null;
             var param = Expression.Parameter(typeof(TData), "x");
-            var property = Expression.Property(param, propertyInfo);
+            var property = Expression.Property(param, PropertyInfo);
             var body = Expression.Convert(property, typeof(object));
             return Expression.Lambda<Func<TData, object>>(body, param);
         }
     }
     public string SortOrder(string propertyName) {
         var n = propertyName;
-        if (!isSameProperty(n)) return n + DescendingString;
-        if (isDescending) return n;
+        if (!IsSameProperty(n)) return n + DescendingString;
+        if (IsDescending) return n;
         return n + DescendingString;
-
     }
 }

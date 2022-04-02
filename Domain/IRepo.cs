@@ -12,12 +12,12 @@ namespace ABC.Domain
     }
 
     public interface IOrderedRepo<T> : IFilteredRepo<T> where T : UniqueEntity {
-        public string CurrentSort { get; set; }
+        public string? CurrentOrder { get; set; }
         public string SortOrder(string propertyName);
     }
 
     public interface IFilteredRepo<T> : ICrudRepo<T> where T : UniqueEntity {
-        public string CurrentFilter { get; set; }
+        public string? CurrentFilter { get; set; }
     }
     public interface ICrudRepo<T> : IBaseRepo<T> where T : UniqueEntity { }
 

@@ -1,5 +1,6 @@
 ﻿@page
 @model ABC.Pages.Party.CountriesPage;
+@using ABC.Pages.Extensions
 
 @{
     Layout = "_Index";
@@ -7,30 +8,16 @@
 <table class="table">
     <thead>
     <tr>
-
         <th>
-            <a asp-page="./Index"
-               asp-page-handler="Index"
-               asp-route-order="@Model.SortOrder(nameof(Model.Item.Name))"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >@nameof(Model.Item.Name)</a>
+            @Html.MyTabHdr(nameof(Model.Item.Name))
+           
         </th>
         <th>
-            <a asp-page="./Index"
-               asp-page-handler="Index"
-               asp-route-order="@Model.SortOrder(nameof(Model.Item.Description))"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >@nameof(Model.Item.Description)</a>
+            @Html.MyTabHdr(nameof(Model.Item.Description))
+            
         </th>
         <th>
-            <a asp-page="./Index"
-               asp-page-handler="Index"
-               asp-route-order="@Model.SortOrder(nameof(Model.Item.Code))"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >@nameof(Model.Item.Code)</a>
+            @Html.MyTabHdr(nameof(Model.Item.Code))
         </th>
         <th></th>
     </tr>
@@ -52,7 +39,7 @@
             <a asp-page="./Edit"
                asp-page-handler="Edit" 
                asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@Model.CurrentFilter"
             >Edit</a>&nbsp 
@@ -60,7 +47,7 @@
             <a asp-page="./Details"
                asp-page-handler="Details"
                asp-route-id="@item.Id" 
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@Model.CurrentFilter"
             >Details</a>&nbsp 
@@ -68,7 +55,7 @@
             <a asp-page="./Delete" 
                asp-page-handler="Delete" 
                asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@Model.CurrentFilter"
             >Delete</a>

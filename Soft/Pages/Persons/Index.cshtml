@@ -1,4 +1,5 @@
 ﻿@page
+@using ABC.Pages.Extensions
 @model ABC.Pages.Party.PersonsPage;
 
 @{
@@ -10,19 +11,19 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].FullName)
+            @Html.MyTabHdr(nameof(Model.Item.FullName))
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].FirstName)
+            @Html.MyTabHdr(nameof(Model.Item.FirstName))
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].LastName)
+            @Html.MyTabHdr(nameof(Model.Item.LastName))
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].Gender)
+            @Html.MyTabHdr(nameof(Model.Item.Gender))
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].Dob)
+            @Html.MyTabHdr(nameof(Model.Item.Dob))
         </th>
         <th></th>
     </tr>
@@ -49,7 +50,7 @@
             <a asp-page="./Edit"
                asp-page-handler="Edit" 
                asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@Model.CurrentFilter"
             >Edit</a>&nbsp 
@@ -57,7 +58,7 @@
             <a asp-page="./Details"
                asp-page-handler="Details"
                asp-route-id="@item.Id" 
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@Model.CurrentFilter"
             >Details</a>&nbsp 
@@ -65,7 +66,7 @@
             <a asp-page="./Delete" 
                asp-page-handler="Delete" 
                asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentSort"
+               asp-route-order="@Model.CurrentOrder"
                asp-route-idx="@Model.PageIndex"
                asp-route-filter="@Model.CurrentFilter"
             >Delete</a>
