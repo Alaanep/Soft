@@ -5,62 +5,6 @@
 @{
     Layout = "_Index";
 }
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.Name))
-           
-        </th>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.Description))
-            
-        </th>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.Code))
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Items) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Code)
-        </td>
-        
-        <td>
-            <a asp-page="./Edit"
-               asp-page-handler="Edit" 
-               asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentOrder"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >Edit</a>&nbsp 
-
-            <a asp-page="./Details"
-               asp-page-handler="Details"
-               asp-route-id="@item.Id" 
-               asp-route-order="@Model.CurrentOrder"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >Details</a>&nbsp 
-
-            <a asp-page="./Delete" 
-               asp-page-handler="Delete" 
-               asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentOrder"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >Delete</a>
-        </td>
-    </tr>
-}
-    </tbody>
-</table>
+<body>
+@Html.ShowTable(Model.Items)
+</body>

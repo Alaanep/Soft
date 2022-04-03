@@ -1,76 +1,12 @@
 ﻿@page
 @model ABC.Pages.Party.AddressesPage;
 @using ABC.Pages.Extensions;
+@using ABC.Facade;
 
 @{
     Layout = "_Index";
 }
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.Street))
-        </th>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.City))
-        </th>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.Region))
-        </th>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.ZipCode))
-        </th>
-        <th>
-            @Html.MyTabHdr(nameof(Model.Item.Country))
-            
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Items) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Street)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            <a asp-page="./Edit"
-               asp-page-handler="Edit" 
-               asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentOrder"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >Edit</a>&nbsp 
 
-            <a asp-page="./Details"
-               asp-page-handler="Details"
-               asp-route-id="@item.Id" 
-               asp-route-order="@Model.CurrentOrder"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >Details</a>&nbsp 
-
-            <a asp-page="./Delete" 
-               asp-page-handler="Delete" 
-               asp-route-id="@item.Id"
-               asp-route-order="@Model.CurrentOrder"
-               asp-route-idx="@Model.PageIndex"
-               asp-route-filter="@Model.CurrentFilter"
-            >Delete</a>
-        </td>
-    </tr>
-}
-    </tbody>
-</table>
+<body>
+    @Html.ShowTable(Model.Items)
+</body>

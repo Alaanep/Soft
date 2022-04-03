@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ABC.Data.Party;
+﻿using ABC.Data.Party;
 using ABC.Domain.Party;
 
 namespace ABC.Infra.Party {
