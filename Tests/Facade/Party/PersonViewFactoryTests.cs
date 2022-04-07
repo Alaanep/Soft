@@ -1,4 +1,6 @@
-﻿using ABC.Aids;
+﻿using System;
+using System.Reflection;
+using ABC.Aids;
 using ABC.Data.Party;
 using ABC.Domain.Party;
 using ABC.Facade.Party;
@@ -30,12 +32,12 @@ namespace ABC.Tests.Facade.Party {
             //todo motelge
             //arePropertiesEqual(v, e)
 
-            areEqual(e.Id, v.Id);
-            areEqual(e.FirstName, v.FirstName);
-            areEqual(e.LastName, v.LastName);
-            areEqual(e.Gender, v.Gender);
-            areEqual(e.Dob, v.Dob);
-            areNotEqual(e.ToString(), v.FullName);
+            areEqual(e.Id, v?.Id);
+            areEqual(e.FirstName, v?.FirstName);
+            areEqual(e.LastName, v?.LastName);
+            areEqual(e.Gender, v?.Gender);
+            areEqual(e.Dob, v?.Dob);
+            areNotEqual(e.ToString(), v?.FullName);
         }
     }
 }

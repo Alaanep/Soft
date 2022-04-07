@@ -1,7 +1,7 @@
 ﻿@model ABC.Pages.Party.PersonsPage;
 @using ABC.Pages.Extensions
 
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.FirstName)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.LastName)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Gender)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Dob)
+@Html.MyEditorFor( m => m.Item.FirstName)
+@Html.MyEditorFor( m => m.Item.LastName)
+@Html.MyEditorFor(m => m.Item.Gender)
+@Html.MyEditorFor(m => m.Item.Dob)

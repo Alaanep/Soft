@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using ABC.Aids;
 
@@ -28,7 +29,7 @@ public abstract class BaseTests: IsTypeTested {
         areEqual(canWrite, !isReadOnly);
         return canWrite;
     }
-    private static T random<T>() => GetRandom.Value<T>();
+    private static T? random<T>() => GetRandom.Value<T>();
 
     private static string getCallingMember(string memberName) {
         var s = new StackTrace();
@@ -40,8 +41,22 @@ public abstract class BaseTests: IsTypeTested {
             if (isNext) return n;
             if (n == memberName) isNext = true;
         }
-
         return string.Empty;
+    }
+
+    protected internal static void arePropertiesEqual(object x, object y) {
+        var e = Array.Empty<PropertyInfo>();
+        var px = x?.GetType().GetProperties() ?? e;
+        var hasProperties = false;
+        foreach (var prop in px) {
+            var a = prop.GetValue(x, null);
+            var py = y?.GetType().GetProperty(prop.Name);
+            if (py == null) continue;
+            var b = py.GetValue(y, null);
+            areEqual(a, b);
+            hasProperties = true;
+        }
+        isTrue(hasProperties, $"No properties found for {x}");
     }
 
 }

@@ -1,11 +1,9 @@
 ﻿@page
 @model ABC.Pages.Party.PersonsPage;
-
 @{
     Layout = "_Edit";
 }
-
 <body>
-<input type="hidden" asp-for="Item.Id" />
-<partial name="_EditPerson"/>
+    <input type="hidden" asp-for="Item.Id" />
+    <partial name="_EditPerson"/>
 </body>

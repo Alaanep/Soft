@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace ABC.Pages;
 
 public abstract class BasePage<TView, TEntity, TRepo> : PageModel
-    where TView: UniqueView
+    where TView: UniqueView, new()
     where TEntity: UniqueEntity
     where TRepo: IBaseRepo<TEntity> {
         
@@ -15,14 +15,14 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
     protected abstract TView toView(TEntity? entity);
     protected abstract TEntity toObject(TView? item);
     protected abstract IActionResult redirectToIndex();
-    [BindProperty] public TView? Item { get; set; }
-    public IList<TView>? Items { get; set; }
+    [BindProperty] public TView Item { get; set; } = new TView();
+    public IList<TView> Items { get; set; } = new List<TView>();
     public string ItemId => Item?.Id ?? string.Empty;
     public BasePage(TRepo r) => repo = r;
     protected abstract void setAttributes(int idx, string? filter, string? order);
     internal virtual void removeKey(params string[] keys) {
         foreach (var key in keys ?? Array.Empty<string>())
-            Safe.Run(() => ModelState.Remove(key));
+           _ = Safe.Run(() => ModelState.Remove(key));
     }
 
     protected virtual async Task<IActionResult> perform(Func<Task<IActionResult>> f, int idx, string? filter, string? order,

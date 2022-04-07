@@ -1,6 +1,7 @@
 ﻿using ABC.Data;
 using ABC.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ABC.Infra;
 
@@ -30,6 +31,14 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData> where 
         } catch { return false; }
     }
     public override TDomain Get(string id) => GetAsync(id).GetAwaiter().GetResult();
+
+    public override List<TDomain> GetAll<TKey>(Func<TDomain, TKey>? orderBy=null) {
+        var r = new List<TDomain>();
+        if (set is null) return r;
+        foreach (var d in set) r.Add(toDomain(d));
+        return (orderBy is null) ? r : r.OrderBy(orderBy).ToList();
+    }
+        
     public override List<TDomain> Get() => GetAsync().GetAwaiter().GetResult();
     public override async Task<TDomain> GetAsync(string id) {
         try {
@@ -51,7 +60,7 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData> where 
             return items;
         } catch { return new List<TDomain>(); }
     }
-    internal async Task<List<TData>> runSql(IQueryable<TData> query)=> await query.AsNoTracking().ToListAsync();//systeem ei jalgi muudatus
+    internal static async Task<List<TData>> runSql(IQueryable<TData> query)=> await query.AsNoTracking().ToListAsync();//systeem ei jalgi muudatus
     protected internal virtual IQueryable<TData> createSql()=> from s in set select s;
     public override bool Update(TDomain obj) => UpdateAsync(obj).GetAwaiter().GetResult();
     public override async Task<bool> UpdateAsync(TDomain obj) {

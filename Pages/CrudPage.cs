@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ABC.Pages;
 
 public abstract class CrudPage<TView, TEntity, TRepo> : BasePage<TView, TEntity, TRepo>
-    where TView : UniqueView
+    where TView : UniqueView, new()
     where TEntity : UniqueEntity
     where TRepo : ICrudRepo<TEntity> {
     protected CrudPage(TRepo r) : base(r) { }
@@ -22,20 +22,19 @@ public abstract class CrudPage<TView, TEntity, TRepo> : BasePage<TView, TEntity,
     protected override async Task<IActionResult> getEditAsync(string id) => await getItemPage(id);
     protected override async Task<IActionResult> postDeleteAsync(string id) {
         if (id == null) return NotFound();
-        await repo.DeleteAsync(id);
+        _ = await repo.DeleteAsync(id);
         return redirectToIndex();
     }
     protected override async Task<IActionResult> postCreateAsync() {
         if (!ModelState.IsValid) return Page();
-        await repo.AddAsync(toObject(Item));
+        _ = await repo.AddAsync(toObject(Item));
         return redirectToIndex();
     }
     protected override async Task<IActionResult> postEditAsync() {
         if (!ModelState.IsValid) return Page();
         var obj = toObject(Item);
         var updated = await repo.UpdateAsync(obj);
-        if (!updated) return NotFound();
-        return redirectToIndex();
+        return !updated ? NotFound() : redirectToIndex();
     }
     protected override async Task<IActionResult> getIndexAsync() {
         var list = await repo.GetAsync();

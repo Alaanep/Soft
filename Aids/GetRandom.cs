@@ -80,9 +80,9 @@ public static class GetRandom {
         return null;
     }
 
-    private static T tryGetObject<T>() {
+    private static T? tryGetObject<T>() {
         var o = tryCreate<T>();
-        foreach (var propertyInfo in o.GetType()?.GetProperties()?? Array.Empty<PropertyInfo>()) {
+        foreach (var propertyInfo in o?.GetType()?.GetProperties()?? Array.Empty<PropertyInfo>()) {
             if(!propertyInfo.CanWrite)continue;
             var v = Value(propertyInfo.PropertyType);
             propertyInfo.SetValue(o, v, null);
@@ -90,8 +90,10 @@ public static class GetRandom {
         return o;
     }
 
-    private static T tryCreate<T>() {
-        var c = typeof(T).GetConstructor(Array.Empty<Type>());
-        return (T) c?.Invoke(null);
-    }
+    private static T? tryCreate<T>()=>
+        Safe.Run(() => {
+            var c = typeof(T).GetConstructor(Array.Empty<Type>());
+            return (c?.Invoke(null) is T t) ? t : default;
+        });
+    
 }

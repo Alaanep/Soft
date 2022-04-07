@@ -1,8 +1,9 @@
 ﻿@model ABC.Pages.Party.AddressesPage;
 @using ABC.Pages.Extensions
 
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Street)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.City)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Region)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.ZipCode)
-@MyEditorForHtml.MyEditorFor(Html, m => m.Item.Country)
+@Html.MyEditorFor( m => m.Item.Street)
+@Html.MyEditorFor( m => m.Item.City)
+@Html.MyEditorFor( m => m.Item.Region)
+@Html.MyEditorFor( m => m.Item.ZipCode)
+@Html.MyDropDownFor( m=>m.Item.Country, Model.Countries)
+

@@ -19,5 +19,4 @@ public static class MyItemButtonsHtml {
         };
         return list;
     }
-    private static string? pageName(IPageModel m) => m?.GetType()?.Name?.Replace("Page", "");
 }

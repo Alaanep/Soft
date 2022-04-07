@@ -27,10 +27,10 @@ namespace ABC.Tests.Facade.Party {
             //todo motelge
             //arePropertiesEqual(v, e)
 
-            areEqual(e.Id, v.Id);
-            areEqual(e.Code, v.Code);
-            areEqual(e.Name, v.Name);
-            areEqual(e.Description, v.Description);
+            areEqual(e.Id, v?.Id);
+            areEqual(e.Code, v?.Code);
+            areEqual(e.Name, v?.Name);
+            areEqual(e.Description, v?.Description);
 
         }
     }

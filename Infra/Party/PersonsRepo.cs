@@ -7,16 +7,18 @@ namespace ABC.Infra.Party
         public PersonsRepo(ABCDb? db) : base(db, db?.Persons) { }
         protected override Person toDomain(PersonData d) => new(d);
 
-        internal override IQueryable<PersonData> addFilter(IQueryable<PersonData> q) {
+        internal override IQueryable<PersonData> addFilter(IQueryable<PersonData> q)
+        {
             var y = CurrentFilter;
-            if (string.IsNullOrWhiteSpace(y)) return q;
-            return q.Where(
-                x => x.Id.Contains(y)
-                     || x.FirstName.Contains(y)
-                     || x.LastName.Contains(y)
-                     || x.Gender.ToString().Contains(y)
-                     || x.Dob.ToString().Contains(y)
-            );
+            return string.IsNullOrWhiteSpace(y)
+                ? q
+                : q.Where(
+                    x => contains(x.Id, y)
+                         || contains(x.FirstName, y)
+                         || contains(x.LastName, y)
+                         || contains(x.Gender.ToString(), y)
+                         || contains(x.Dob.ToString(), y)
+                );
         }
     }
 }

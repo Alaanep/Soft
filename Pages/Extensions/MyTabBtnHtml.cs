@@ -24,6 +24,6 @@ public static class MyTabBtnHtml
         };
         return list;
     }
-    private static string? pageName(IPageModel m) => m?.GetType()?.Name?.Replace("Page", "");
+    private static string? pageName(IPageModel? m) => m?.GetType()?.Name?.Replace("Page", "");
 }
 

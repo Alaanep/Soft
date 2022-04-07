@@ -84,10 +84,12 @@ namespace ABC.Tests.Aids;
     [TestMethod] public void ValueTest() {
         var x = GetRandom.Value<PersonData>() as PersonData;
         var y = GetRandom.Value<PersonData>() as PersonData;
-        areNotEqual(x.Id, y.Id, nameof(x.Id));
-        areNotEqual(x.FirstName, y.FirstName, nameof(x.FirstName));
-        areNotEqual(x.LastName, y.LastName, nameof(x.LastName));
+        isNotNull(x);
+        isNotNull(y);
+        areNotEqual(x?.Id, y?.Id, nameof(x.Id));
+        areNotEqual(x?.FirstName, y?.FirstName, nameof(x.FirstName));
+        areNotEqual(x?.LastName, y?.LastName, nameof(x.LastName));
         //areNotEqual(x.Gender, y.Gender, nameof(x.Gender));
-        areNotEqual(x.Dob, y.Dob, nameof(x.Dob));
+        areNotEqual(x?.Dob, y?.Dob, nameof(x.Dob));
     }
 }

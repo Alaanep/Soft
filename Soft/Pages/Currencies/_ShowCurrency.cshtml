@@ -1,7 +1,7 @@
 ﻿@model ABC.Pages.Party.CurrenciesPage
 @using ABC.Pages.Extensions
 
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Name)
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Description)
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Code)
+@Html.MyEditorFor( m => m.Item.Name)
+@Html.MyEditorFor(m => m.Item.Description)
+@Html.MyEditorFor(m => m.Item.Code)
 

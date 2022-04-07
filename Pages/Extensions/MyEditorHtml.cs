@@ -6,27 +6,41 @@ namespace ABC.Pages.Extensions
 {
     public static class MyEditorForHtml
     {
-        public static IHtmlContent MyEditorFor<TModel, TResult>(this IHtmlHelper<TModel>html, Expression<Func<TModel, TResult>> expression)
+        public static IHtmlContent MyEditorFor<TModel, TResult>(
+            this IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression)
         {
             var h = htmlStrings(html, expression);
             return new HtmlContentBuilder(h);
-        } 
-        private static List<object> htmlStrings<TModel, TResult>(IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression)
-        {
-            var list = new List<object>();
-            list.Add(new HtmlString("<div class=\"row\">"));
-                list.Add(new HtmlString("<dd class=\"col-sm-2\">"));
-                    list.Add(html.LabelFor(expression, null, new {@class="control-label"}));
-                list.Add(new HtmlString("</dd>"));
-                list.Add(new HtmlString("<dd class\"col-sm-10\">"));
-                    list.Add(html.EditorFor(expression, new {htmlAttributes=new {@class="from-control"}}));
-                    list.Add(new HtmlString("&nbsp;"));
-                    list.Add(new HtmlString("&nbsp;"));
-                    list.Add(html.ValidationMessageFor(expression, null, new {@class="text-danger"}));
-                list.Add(new HtmlString("</dd>"));
-            list.Add(new HtmlString("</div>"));
+        }
+
+        private static List<object> htmlStrings<TModel, TResult>(IHtmlHelper<TModel> html,
+            Expression<Func<TModel, TResult>> expression) {
+            var list = new List<object> {
+                new HtmlString("<dl class=\"row\">"),
+                new HtmlString("<dd class=\"col-sm-2\">"),
+                html.LabelFor(expression, null, new {@class = "control-label"}),
+                new HtmlString("</dd>"),
+                new HtmlString("<dd class=\"col-sm-10\">"),
+                html.EditorFor(expression, new {htmlAttributes = new {@class = "form-control"}}),
+                html.ValidationMessageFor(expression, null, new {@class = "text-danger"}),
+                new HtmlString("</dd>"),
+                new HtmlString("</dl>")
+            };
             return list;
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

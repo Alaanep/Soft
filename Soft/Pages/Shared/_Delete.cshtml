@@ -11,21 +11,21 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>ViewData["SubTitle"]</h4>
+    <h4>@ViewData["SubTitle"]</h4>
     <hr />
     @RenderBody()
     
     <form method="post" 
           asp-route-id="@itemId"
           asp-page-handler="Delete"
-          asp-route-order="@Model.CurrentOrder"
-          asp-route-idx="@Model.PageIndex"
-          asp-route-Filter="@Model.CurrentFilter">
+          asp-route-order="@Model?.CurrentOrder"
+          asp-route-idx="@Model?.PageIndex"
+          asp-route-Filter="@Model?.CurrentFilter">
         <input type="hidden" asp-for-id="@itemId" />
         <input type="submit" value="Delete" class="btn btn-danger" />  
         <a asp-page="Index" asp-page-handler="Index"
-           asp-route-order="@Model.CurrentOrder"
-           asp-route-idx="@Model.PageIndex"
-           asp-route-filter="@Model.CurrentFilter">Back to List</a>
+           asp-route-order="@Model?.CurrentOrder"
+           asp-route-idx="@Model?.PageIndex"
+           asp-route-filter="@Model?.CurrentFilter">Back to List</a>
     </form>
 </div>

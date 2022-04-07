@@ -1,8 +1,8 @@
 ﻿@model ABC.Pages.Party.AddressesPage
 @using ABC.Pages.Extensions
 
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Street)
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.City)
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Region)
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.ZipCode)
-@MyViewerForHtml.MyViewerFor(Html, m => m.Item.Country)
+@Html.MyViewerFor(m => m.Item.Street)
+@Html.MyViewerFor(m => m.Item.City)
+@Html.MyViewerFor(m => m.Item.Region)
+@Html.MyViewerFor(m => m.Item.ZipCode)
+@Html.MyViewerFor(m => m.Item.Country, Model.CountryName(Model.Item.Country))

@@ -29,13 +29,13 @@ namespace ABC.Tests.Facade.Party {
             isNotNull(e);
             //todo motelge
             //arePropertiesEqual(v, e)
-            areEqual(e.Id, v.Id);
-            areEqual(e.Street, v.Street);
-            areEqual(e.City, v.City);
-            areEqual(e.Region, v.Region);
-            areEqual(e.ZipCode, v.ZipCode);
-            areEqual(e.Country, v.Country);
-            areNotEqual(e.ToString(), v.FullName);
+            areEqual(e.Id, v?.Id);
+            areEqual(e.Street, v?.Street);
+            areEqual(e.City, v?.City);
+            areEqual(e.Region, v?.Region);
+            areEqual(e.ZipCode, v?.ZipCode);
+            areEqual(e.Country, v?.Country);
+            areNotEqual(e.ToString(), v?.FullName);
         }
     }
 }

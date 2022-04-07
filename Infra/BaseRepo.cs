@@ -17,6 +17,7 @@ namespace ABC.Infra {
         public abstract bool Add(TDomain obj);
         public abstract TDomain Get(string id);
         public abstract List<TDomain> Get();
+        public abstract List<TDomain> GetAll<TKey>(Func<TDomain, TKey>? orderBy=null);
         public abstract bool Update(TDomain obj);
         public abstract bool Delete(string id);
         public abstract Task<bool> AddAsync(TDomain obj);

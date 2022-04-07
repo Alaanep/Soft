@@ -62,9 +62,7 @@ namespace Soft
             {
                 var abcDb = scope.ServiceProvider.GetService<ABCDb>();
                 abcDb?.Database?.EnsureCreated();
-                AbcInitializer.Init(abcDb);
-               
-
+                if (abcDb != null) AbcInitializer.Init(abcDb);
             }
 
             app.UseHttpsRedirection();
