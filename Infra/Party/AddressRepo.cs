@@ -13,7 +13,7 @@ public class AddressRepo : Repo<Address, AddressData>, IAddressRepo {
             ? q
             : q.Where(
                 x => contains(x.Street, y)
-                     || contains(x.Country, y)
+                     || contains(x.CountryId, y)
                      || contains(x.Id, y)
                      || contains(x.City, y)
                      || contains(x.Region, y)

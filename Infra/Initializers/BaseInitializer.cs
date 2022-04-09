@@ -19,7 +19,7 @@ public abstract class BaseInitializer<TData> where TData: UniqueData {
     }
 
     protected abstract IEnumerable<TData> getEntities{ get; }
-    internal static bool isCorrectIsoCode(string id) => string.IsNullOrWhiteSpace(id) ? false : char.IsLetter(id[0]);
+    internal static bool isCorrectIsoCode(string id) => !string.IsNullOrWhiteSpace(id) && char.IsLetter(id[0]);
 }
 
 public static class AbcInitializer {

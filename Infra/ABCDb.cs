@@ -8,6 +8,8 @@ namespace ABC.Infra {
         public DbSet<AddressData>? Addresses { get; set; }
         public DbSet<CountryData>? Countries { get; set; }
         public DbSet<CurrencyData>? Currencies { get; set; }
+        public DbSet<CountryCurrencyData>? CountryCurrencies { get; set; }
+        public DbSet<PersonAddressData>? PersonAddresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
@@ -20,6 +22,8 @@ namespace ABC.Infra {
             _ = (modelBuilder?.Entity<AddressData>()?.ToTable(nameof(Addresses), s));
             _ = (modelBuilder?.Entity<CountryData>()?.ToTable(nameof(Countries), s));
             _ = (modelBuilder?.Entity<CurrencyData>()?.ToTable(nameof(Currencies), s));
+            _ = (modelBuilder?.Entity<CountryCurrencyData>()?.ToTable(nameof(CountryCurrencies), s));
+            _ = (modelBuilder?.Entity<PersonAddressData>()?.ToTable(nameof(PersonAddresses), s));
         }
     }
 }

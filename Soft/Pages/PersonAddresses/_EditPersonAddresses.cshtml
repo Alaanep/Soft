@@ -1,0 +1,8 @@
+﻿@model ABC.Pages.Party.PersonAddressesPage;
+@using ABC.Pages.Extensions
+
+@Html.MyEditorFor( m => m.Item.Code)
+@Html.MyEditorFor( m => m.Item.Name)
+@Html.MyDropDownFor( m=>m.Item.PersonId, Model.Persons)
+@Html.MyDropDownFor( m=>m.Item.AddressId, Model.Addresses)
+

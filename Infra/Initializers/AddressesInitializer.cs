@@ -19,7 +19,7 @@ namespace ABC.Infra.Initializers {
                 City = city,
                 Region = region,
                 ZipCode = zipCode,
-                Country = country
+                CountryId = country
             };
             return person;
         }

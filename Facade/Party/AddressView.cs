@@ -9,14 +9,9 @@ public sealed class AddressView : UniqueView {
     [DisplayName("City")] public string? City { get; set; }
     [DisplayName("Region")] public string? Region { get; set; }
     [DisplayName("ZipCode")] public string? ZipCode { get; set; }
-    [DisplayName("Country")] public string? Country { get; set; }
-    [DisplayName("Full Address")] public string? FullName { get; set; }
+    [DisplayName("Country")] public string? CountryId { get; set; }
 }
 public sealed class AddressViewFactory : BaseViewFactory<AddressView, Address, AddressData> {
     protected override Address toEntity(AddressData d) => new(d);
-    public override AddressView Create(Address? e) {
-        var v = base.Create(e);
-        v.FullName = e?.ToString();
-        return v;
-    }
+    
 }

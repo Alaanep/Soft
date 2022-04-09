@@ -1,0 +1,12 @@
+﻿@page
+@model ABC.Pages.Party.PersonAddressesPage;
+@using ABC.Pages.Extensions;
+@using ABC.Facade;
+
+@{
+    Layout = "_Index";
+}
+
+<body>
+    @Html.ShowTable(Model.Items)
+</body>

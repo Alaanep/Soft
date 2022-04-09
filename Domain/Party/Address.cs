@@ -8,7 +8,7 @@ namespace ABC.Domain.Party {
         public string City => getValue(Data?.City); 
         public string Region => getValue(Data?.Region);
         public string ZipCode => getValue(Data?.ZipCode);
-        public string Country => getValue(Data?.Country);
-        public override string ToString() => $"{Street} {City} {ZipCode} {Country}";
+        public string CountryId => getValue(Data?.CountryId);
+        public override string ToString() => $"{Street} {City} {ZipCode} {CountryId}";
     }
 }

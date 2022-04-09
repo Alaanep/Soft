@@ -1,0 +1,7 @@
+﻿@model ABC.Pages.Party.CountryCurrenciesPage
+@using ABC.Pages.Extensions
+
+@Html.MyViewerFor(m => m.Item.Code)
+@Html.MyViewerFor(m => m.Item.Name)
+@Html.MyViewerFor(m => m.Item.CountryId, Model.CountryName(Model.Item.CountryId))
+@Html.MyViewerFor(m => m.Item.CurrencyId, Model.CurrencyName(Model.Item.CurrencyId))

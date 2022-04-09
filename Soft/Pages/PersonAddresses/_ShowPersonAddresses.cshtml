@@ -1,0 +1,7 @@
+﻿@model ABC.Pages.Party.PersonAddressesPage
+@using ABC.Pages.Extensions
+
+@Html.MyViewerFor(m => m.Item.Code)
+@Html.MyViewerFor(m => m.Item.Name)
+@Html.MyViewerFor(m => m.Item.PersonId, Model.PersonName(Model.Item.PersonId))
+@Html.MyViewerFor(m => m.Item.AddressId, Model.AddressName(Model.Item.AddressId))

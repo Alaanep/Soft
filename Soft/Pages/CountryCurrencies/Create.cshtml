@@ -1,0 +1,14 @@
+﻿@page
+@model ABC.Pages.Party.CountryCurrenciesPage;
+@using ABC.Pages.Extensions
+
+@{
+
+    Layout = "_Create";
+}
+<body>
+    @Html.MyEditorFor(m => m.Item.Id)
+    <partial name="_EditCountryCurrency"/>
+
+</body>
+

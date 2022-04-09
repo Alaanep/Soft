@@ -19,8 +19,8 @@ namespace ABC.Tests.Facade.Party {
             areEqual(v.City, e.City);
             areEqual(v.Region, e.Region);
             areEqual(v.ZipCode, e.ZipCode);
-            areEqual(v.Country, e.Country);
-            areEqual(v.FullName, e.ToString());
+            areEqual(v.CountryId, e.Country);
+            //areEqual(v.FullName, e.ToString());
         }
         [TestMethod]
         public void CreateEntityTest() {

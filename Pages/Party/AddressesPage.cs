@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ABC.Pages.Party;
 
-public class AddressesPage : PagedPage<AddressView, Address, IAddressRepo>
-{
+public class AddressesPage : PagedPage<AddressView, Address, IAddressRepo> {
     private readonly ICountryRepo countries;
-
     public AddressesPage(IAddressRepo r, ICountryRepo c) : base(r) {
         countries = c;
     }
@@ -21,7 +19,7 @@ public class AddressesPage : PagedPage<AddressView, Address, IAddressRepo>
         nameof(AddressView.City),
         nameof(AddressView.Region),
         nameof(AddressView.ZipCode),
-        nameof(AddressView.Country)
+        nameof(AddressView.CountryId)
     };
     public IEnumerable<SelectListItem> Countries
         => countries?.GetAll(x => x.Name)?
@@ -33,6 +31,6 @@ public class AddressesPage : PagedPage<AddressView, Address, IAddressRepo>
 
     public override object? GetValue(string name, AddressView v) {
         var result = base.GetValue(name, v);
-        return name == nameof(AddressView.Country) ? CountryName(result as string) : result;
+        return name == nameof(AddressView.CountryId) ? CountryName(result as string) : result;
     }
 }

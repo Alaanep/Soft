@@ -36,10 +36,13 @@ namespace Soft
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<IPersonsRepo, PersonsRepo>();
+            services.AddTransient<IPersonRepo, PersonsRepo>();
             services.AddTransient<IAddressRepo, AddressRepo>();
             services.AddTransient<ICountryRepo, CountryRepo>();
             services.AddTransient<ICurrencyRepo, CurrencyRepo>();
+            services.AddTransient<ICountryCurrencyRepo, CountryCurrenciesRepo>();
+            services.AddTransient<IPersonAddressRepo, PersonAddressesRepo>();
+
 
         }
 
