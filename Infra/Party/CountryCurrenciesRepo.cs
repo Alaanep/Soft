@@ -6,7 +6,7 @@ namespace ABC.Infra.Party;
 public class CountryCurrenciesRepo : Repo<CountryCurrency, CountryCurrencyData>, ICountryCurrencyRepo {
     public CountryCurrenciesRepo(ABCDb? db) : base(db, db?.CountryCurrencies) { }
     protected override CountryCurrency toDomain(CountryCurrencyData d) => new(d);
-    internal override IQueryable<CountryCurrencyData> addFilter(IQueryable<CountryCurrencyData> q) {
+    /*internal override IQueryable<CountryCurrencyData> addFilter(IQueryable<CountryCurrencyData> q) {
         var y = CurrentFilter;
         return string.IsNullOrWhiteSpace(y)
             ? q
@@ -16,6 +16,18 @@ public class CountryCurrenciesRepo : Repo<CountryCurrency, CountryCurrencyData>,
                      || contains(x.Name, y)
                      || contains(x.CountryId, y)
                      || contains(x.CurrencyId, y)
+            );
+    }*/
+    internal override IQueryable<CountryCurrencyData> addFilter(IQueryable<CountryCurrencyData> q) {
+        var y = CurrentFilter;
+        return string.IsNullOrWhiteSpace(y)
+            ? q
+            : q.Where(
+                x => contains(x.Id, y)
+                     || x.Code.Contains(y)
+                     || x.Name.Contains( y)
+                     || x.CountryId.Contains(y)
+                     || x.CurrencyId.Contains(y)
             );
     }
 }

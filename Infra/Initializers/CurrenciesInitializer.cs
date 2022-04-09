@@ -4,8 +4,8 @@ using ABC.Data;
 using ABC.Domain;
 
 namespace ABC.Infra.Initializers {
-    public sealed class CurrenciesInitalizer: BaseInitializer<CurrencyData> {
-        public CurrenciesInitalizer(ABCDb? db): base(db, db?.Currencies) {}
+    public sealed class CurrenciesInitializer: BaseInitializer<CurrencyData> {
+        public CurrenciesInitializer(ABCDb? db): base(db, db?.Currencies) {}
         protected override IEnumerable<CurrencyData> getEntities {
             get {
                 var l = new List<CurrencyData>();

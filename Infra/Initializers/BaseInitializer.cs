@@ -21,12 +21,3 @@ public abstract class BaseInitializer<TData> where TData: UniqueData {
     protected abstract IEnumerable<TData> getEntities{ get; }
     internal static bool isCorrectIsoCode(string id) => !string.IsNullOrWhiteSpace(id) && char.IsLetter(id[0]);
 }
-
-public static class AbcInitializer {
-    public static void Init(ABCDb abcDb) {
-        new AddressesInitializer(abcDb).Init();
-        new PersonsInitializer(abcDb).Init();
-        new CountriesInitializer(abcDb).Init();
-        new CurrenciesInitalizer(abcDb).Init();
-    }
-}
