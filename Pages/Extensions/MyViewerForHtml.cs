@@ -12,7 +12,7 @@ namespace ABC.Pages.Extensions {
         }
 
         public static IHtmlContent MyViewerFor<TModel, TResult>(
-            this IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression, TResult value) {
+            this IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression, dynamic value) {
             var h = htmlStrings(html, expression, value);
             return new HtmlContentBuilder(h);
         }
@@ -30,7 +30,7 @@ namespace ABC.Pages.Extensions {
             return list;
         }
 
-        private static List<object> htmlStrings<TModel, TResult>(IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression, TResult value) {
+        private static List<object> htmlStrings<TModel, TResult>(IHtmlHelper<TModel> html, Expression<Func<TModel, TResult>> expression, dynamic value) {
             var list = new List<object> {
                 new HtmlString("<dl class=\"row\">"),
                 new HtmlString("<dt class=\"col-sm-2\">"),

@@ -1,4 +1,5 @@
-﻿using ABC.Data.Party;
+﻿using ABC.Aids;
+using ABC.Data.Party;
 
 namespace ABC.Domain.Party {
     public class Person : UniqueEntity<PersonData> { 
@@ -6,8 +7,8 @@ namespace ABC.Domain.Party {
         public Person(PersonData d): base(d){}
         public string FirstName => getValue(Data?.FirstName);
         public string LastName => getValue(Data?.LastName);
-        public bool Gender => getValue(Data?.Gender);
+        public IsoGender Gender => getValue(Data?.Gender);
         public DateTime Dob => getValue(Data?.Dob);
-        public override string ToString() => $"{FirstName} {LastName} {Gender} {Dob}";
+        public override string ToString() => $"{FirstName} {LastName} ({Gender.Description()} {Dob})";
     }
 }

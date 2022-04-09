@@ -1,4 +1,6 @@
 ﻿using ABC.Data;
+using ABC.Data.Party;
+
 namespace ABC.Domain;
 public abstract class UniqueEntity {
     public static  string defaultStr => "Undefined";
@@ -7,6 +9,7 @@ public abstract class UniqueEntity {
     protected static string getValue(string? v) => v ?? defaultStr;
     protected static bool getValue(bool? v) => v ?? defaultBool;
     protected static DateTime getValue(DateTime? v) => v ?? defaultDate;
+    protected static IsoGender getValue(IsoGender? v) => v ?? IsoGender.NotApplicable;
 }
 
 public abstract class UniqueEntity<TData>: UniqueEntity where TData : UniqueData, new() {

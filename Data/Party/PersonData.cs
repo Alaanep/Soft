@@ -5,7 +5,7 @@ namespace ABC.Data.Party
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public bool? Gender { get; set; }
+        public IsoGender Gender { get; set; }
         public DateTime? Dob { get; set; }
 
     }

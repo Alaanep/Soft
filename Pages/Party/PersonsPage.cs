@@ -1,5 +1,8 @@
-﻿using ABC.Domain.Party;
+﻿using ABC.Aids;
+using ABC.Data.Party;
+using ABC.Domain.Party;
 using ABC.Facade.Party;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ABC.Pages.Party;
 
@@ -16,4 +19,17 @@ public class PersonsPage: PagedPage <PersonView, Person, IPersonsRepo> {
         nameof(PersonView.Dob),
         nameof(PersonView.FullName)
     };
+
+    public IEnumerable<SelectListItem> Genders
+        =>Enum.GetValues<IsoGender>()?
+              .Select(x => new SelectListItem(x.Description(), x.ToString()))
+          ?? new List<SelectListItem>();
+
+    public string GenderDescription(IsoGender? isoGender)
+                => (isoGender ?? IsoGender.NotApplicable).Description();
+
+    public override object? GetValue(string name, PersonView v) {
+        var result = base.GetValue(name, v);
+        return name == nameof(PersonView.Gender) ? GenderDescription((IsoGender)result) : result;
+    }
 }
