@@ -23,7 +23,7 @@ public class CountryCurrenciesRepo : Repo<CountryCurrency, CountryCurrencyData>,
         return string.IsNullOrWhiteSpace(y)
             ? q
             : q.Where(
-                x => contains(x.Id, y)
+                x => x.Id.Contains(y)
                      || x.Code.Contains(y)
                      || x.Name.Contains( y)
                      || x.CountryId.Contains(y)
