@@ -1,3 +1,4 @@
+using ABC.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,31 +39,27 @@ namespace Soft
 
             services.AddTransient<IPersonRepo, PersonsRepo>();
             services.AddTransient<IAddressRepo, AddressRepo>();
-            services.AddTransient<ICountryRepo, CountryRepo>();
-            services.AddTransient<ICurrencyRepo, CurrencyRepo>();
-            services.AddTransient<ICountryCurrencyRepo, CountryCurrenciesRepo>();
+            services.AddTransient<ICountriesRepo, CountriesRepo>();
+            services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
+            services.AddTransient<ICountryCurrenciesRepo, CountryCurrenciesesRepo>();
             services.AddTransient<IPersonAddressRepo, PersonAddressesRepo>();
 
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
-            }
-            else
-            {
+            }else {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
+            using (var scope = app.ApplicationServices.CreateScope()) {
+                GetRepo.SetService(app.ApplicationServices);
                 var abcDb = scope.ServiceProvider.GetService<ABCDb>();
                 abcDb?.Database?.EnsureCreated();
                 if (abcDb != null) AbcInitializer.Init(abcDb);
@@ -76,8 +73,7 @@ namespace Soft
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => {
                 endpoints.MapRazorPages();
             });
         }

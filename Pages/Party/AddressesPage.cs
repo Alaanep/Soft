@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace ABC.Pages.Party;
 
 public class AddressesPage : PagedPage<AddressView, Address, IAddressRepo> {
-    private readonly ICountryRepo countries;
-    public AddressesPage(IAddressRepo r, ICountryRepo c) : base(r) {
-        countries = c;
+    private readonly ICountriesRepo _countrieses;
+    public AddressesPage(IAddressRepo r, ICountriesRepo c) : base(r) {
+        _countrieses = c;
     }
     protected override Address toObject(AddressView? item) => new AddressViewFactory().Create(item);
     protected override AddressView toView(Address? entity) => new AddressViewFactory().Create(entity);
@@ -22,7 +22,7 @@ public class AddressesPage : PagedPage<AddressView, Address, IAddressRepo> {
         nameof(AddressView.CountryId)
     };
     public IEnumerable<SelectListItem> Countries
-        => countries?.GetAll(x => x.Name)?
+        => _countrieses?.GetAll(x => x.Name)?
                .Select(x => new SelectListItem(x.Name, x.Id))
            ?? new List<SelectListItem>();
 

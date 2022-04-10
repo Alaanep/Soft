@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ABC.Pages.Party;
 
-public class CountryCurrenciesPage : PagedPage<CountryCurrencyView, CountryCurrency, ICountryCurrencyRepo> {
-    private readonly ICountryRepo countries;
-    private readonly ICurrencyRepo currencies;
+public class CountryCurrenciesPage : PagedPage<CountryCurrencyView, CountryCurrency, ICountryCurrenciesRepo> {
+    private readonly ICountriesRepo _countrieses;
+    private readonly ICurrenciesRepo _currencieses;
 
-    public CountryCurrenciesPage(ICountryCurrencyRepo r, ICountryRepo co, ICurrencyRepo cu) : base(r) {
-        countries = co;
-        currencies = cu;
+    public CountryCurrenciesPage(ICountryCurrenciesRepo r, ICountriesRepo co, ICurrenciesRepo cu) : base(r) {
+        _countrieses = co;
+        _currencieses = cu;
     }
     protected override CountryCurrency toObject(CountryCurrencyView? item) => new CountryCurrencyViewFactory().Create(item);
     protected override CountryCurrencyView toView(CountryCurrency? entity) => new CountryCurrencyViewFactory().Create(entity);
@@ -21,12 +21,12 @@ public class CountryCurrenciesPage : PagedPage<CountryCurrencyView, CountryCurre
         nameof(CountryCurrencyView.CurrencyId)
     };
     public IEnumerable<SelectListItem> Countries
-        => countries?.GetAll(x => x.Name)?
+        => _countrieses?.GetAll(x => x.Name)?
                .Select(x => new SelectListItem(x.Name, x.Id))
            ?? new List<SelectListItem>();
 
     public IEnumerable<SelectListItem> Currencies
-        => currencies?.GetAll(x => x.Name)?
+        => _currencieses?.GetAll(x => x.Name)?
                .Select(x => new SelectListItem(x.Name, x.Id))
            ?? new List<SelectListItem>();
 

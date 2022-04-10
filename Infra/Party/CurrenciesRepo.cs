@@ -3,8 +3,8 @@ using ABC.Domain.Party;
 
 namespace ABC.Infra.Party {
     
-    public class CurrencyRepo : Repo<Currency, CurrencyData>, ICurrencyRepo {
-        public CurrencyRepo(ABCDb? db) : base(db, db?.Currencies) { }
+    public class CurrenciesRepo : Repo<Currency, CurrencyData>, ICurrenciesRepo {
+        public CurrenciesRepo(ABCDb? db) : base(db, db?.Currencies) { }
         protected override Currency toDomain(CurrencyData d) => new(d);
         /* internal override IQueryable<CurrencyData> addFilter(IQueryable<CurrencyData> q)
          {
