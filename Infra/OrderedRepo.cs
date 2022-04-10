@@ -20,8 +20,8 @@ public abstract class OrderedRepo<TDomain, TData> : FilteredRepo<TDomain, TData>
     }
     internal bool IsDescending => CurrentOrder?.EndsWith(DescendingString) ?? false;
     internal bool IsSameProperty(string s) => (!string.IsNullOrEmpty(s) && (CurrentOrder?.StartsWith(s) ?? false));
-    internal string PropertyName => CurrentOrder?.Replace(DescendingString, "")?? "";
-    internal PropertyInfo? PropertyInfo => typeof(TData).GetProperty(PropertyName);
+    internal string DisplayName => CurrentOrder?.Replace(DescendingString, "")?? "";
+    internal PropertyInfo? PropertyInfo => typeof(TData).GetProperty(DisplayName);
 
     internal Expression<Func<TData, object>>? LambdaExpression {
         get
