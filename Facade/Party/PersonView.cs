@@ -16,10 +16,16 @@ namespace ABC.Facade.Party
 
     public sealed class PersonViewFactory : BaseViewFactory<PersonView, Person, PersonData> {
         protected override Person toEntity(PersonData d) => new(d);
-        public override PersonView Create(Person? e)
-        {
+
+        public override Person Create(PersonView? v) {
+            v ??= new PersonView();
+            v.Gender ??= IsoGender.NotApplicable;
+            return base.Create(v);
+        }
+        public override PersonView Create(Person? e) {
             var v = base.Create(e);
             v.FullName = e?.ToString();
+            v.Gender=e?.Gender;
             return v;
         }
     }

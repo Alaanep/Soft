@@ -25,7 +25,7 @@ public sealed class CountriesInitializer : BaseInitializer<CountryData> {
         }
     }
 
-    internal static CountryData greateCountry(string code, string name, string description) => new CountryData() {
+    internal static CountryData greateCountry(string code, string name, string description) => new() {
         Id = code??UniqueData.NewId,
         Code = code??UniqueEntity.defaultStr,
         Name = name,

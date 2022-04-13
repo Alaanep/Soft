@@ -19,7 +19,7 @@ namespace ABC.Tests.Facade.Party {
             areEqual(v.City, e.City);
             areEqual(v.Region, e.Region);
             areEqual(v.ZipCode, e.ZipCode);
-            areEqual(v.CountryId, e.Country);
+            areEqual(v.CountryId, e.CountryId);
             //areEqual(v.FullName, e.ToString());
         }
         [TestMethod]
@@ -34,8 +34,8 @@ namespace ABC.Tests.Facade.Party {
             areEqual(e.City, v?.City);
             areEqual(e.Region, v?.Region);
             areEqual(e.ZipCode, v?.ZipCode);
-            areEqual(e.Country, v?.Country);
-            areNotEqual(e.ToString(), v?.FullName);
+            areEqual(e.CountryId, v?.CountryId);
+            //areNotEqual(e.ToString(), v?.FullName);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace ABC.Tests.Facade.Party {
         [TestMethod] public void CityTest() => isProperty<string?>();
         [TestMethod] public void RegionTest() => isProperty<string?>();
         [TestMethod] public void ZipCodeTest() => isProperty<string?>();
-        [TestMethod] public void CountryTest() => isProperty<string?>();
-        [TestMethod] public void FullNameTest() => isProperty<string?>();
+        [TestMethod] public void CountryIdTest() => isProperty<string?>();
     }
 }
