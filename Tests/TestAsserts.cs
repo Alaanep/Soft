@@ -13,5 +13,5 @@ public abstract class TestAsserts
     protected static void areNotEqual(object? expected, object? actual, string? message = null) => Assert.AreNotEqual(expected, actual, message);
     protected static void isInstanceOfType(object o, Type expectedType, string? message = null) => Assert.IsInstanceOfType(o, expectedType, message);
     protected static void isTrue(bool? b, string? message=null) => Assert.IsTrue(b ?? false, message ?? string.Empty);
-    protected static void isFalse(bool? b, string? message = null) => Assert.IsTrue(b ?? true, message ?? string.Empty);
+    protected static void isFalse(bool? b, string? message = null) => Assert.IsFalse(b ?? true, message ?? string.Empty);
 }
