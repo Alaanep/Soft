@@ -58,7 +58,7 @@ namespace ABC.Tests.Aids;
     [TestMethod] public void DeclaredMembersTest() {
         areEqual(1, type?.DeclaredMembers()?.Count);
         var l = typeof(NamedData)?.DeclaredMembers();
-        areEqual(10, l?.Count);
+        areEqual(9, l?.Count);
     }
 
     [TestMethod] public void IsInheritedTest()

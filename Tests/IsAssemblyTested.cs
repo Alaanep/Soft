@@ -21,6 +21,7 @@ namespace ABC.Tests {
             testingAssembly = getAssembly(this);
             testingTypes = getTypes(testingAssembly);
             namespaceOfTest = getNameSpace(this);
+            removeNotInNamespace();
             namespaceOfType = removeTestsTagForm(namespaceOfTest);
             assemblyToBeTested = getAssembly(namespaceOfType);
             typesToBeTested = getTypes(assemblyToBeTested);
@@ -30,6 +31,7 @@ namespace ABC.Tests {
             reportNotAllIsTested();
         }
 
+        private void removeNotInNamespace() => testingTypes.Remove(x => !Types.NameStarts(x, namespaceOfTest));
         private static string? removeTestsTagForm(string? s) => s?.Remove("Tests.");
         private static string? getNameSpace(object obj) => GetNameSpace.OfType(obj);
         private static Assembly? getAssembly(object o) => GetAssembly.OfType(o);

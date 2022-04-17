@@ -1,12 +1,9 @@
-﻿using ABC.Data.Party;
+﻿using System;
+using ABC.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DateTime = System.DateTime;
 
-namespace ABC.Tests.Data.Party
-{   
-    [TestClass]
-    public class PersonDataTests: SealedClassTests<PersonData>
-    {
+namespace ABC.Tests.Data.Party {   
+    [TestClass] public class PersonDataTests: SealedClassTests<PersonData> {
         [TestMethod] public void IdTest() => isProperty<string>();
         [TestMethod] public void FirstNameTest() => isProperty<string?>();
         [TestMethod] public void LastNameTest() => isProperty<string?>();
