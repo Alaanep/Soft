@@ -6,10 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Facade {
     [TestClass]
-    public class BaseViewFactoryTests : AbstractClassTests {
+    public class BaseViewFactoryTests : AbstractClassTests<BaseViewFactory<AddressView, Address, AddressData>, object> {
         private class testClass : BaseViewFactory<AddressView, Address, AddressData> {
             protected override Address toEntity(AddressData d) => new(d);
         }
-        protected override object createObj() => new testClass();
+        protected override BaseViewFactory<AddressView, Address, AddressData> createObj() => new testClass();
     }
 }

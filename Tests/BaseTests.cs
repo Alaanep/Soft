@@ -2,25 +2,30 @@
 using System.Diagnostics;
 using System.Reflection;
 using ABC.Aids;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests;
 
-public abstract class BaseTests: IsTypeTested {
-    protected object obj;
+public abstract class BaseTests<TClass, TBaseClass>: IsTypeTested where TClass : class where TBaseClass : class {
+    protected TClass obj;
     protected  BaseTests()=>obj=createObj();
 
-    protected abstract object createObj();
+    protected abstract TClass createObj();
 
-    protected void isProperty<T>(T? value = default, bool isReadOnly = false) {
-        var memberName = getCallingMember(nameof(isProperty)).Replace("Test", string.Empty);
+    protected void isProperty<T>(T? value = default, bool isReadOnly = false, string? callingMethod=null)
+    {
+        callingMethod ??= nameof(isProperty);
+        var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
         var propertyInfo = obj.GetType().GetProperty(memberName);
         isNotNull(propertyInfo);
         if (isNullOrDefault(value)) value = random<T>();
         if (!canWrite(propertyInfo, isReadOnly)) return;
         propertyInfo.SetValue(obj, value);
         areEqual(value, propertyInfo.GetValue(obj));
-
     }
+
+    protected void isReadOnly<T>(T? value) => isProperty(value, true, nameof(isReadOnly));
+        
 
     private static bool isNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;//kas T tüüp on oma vaikeväärtusega võrdne
 
@@ -58,5 +63,7 @@ public abstract class BaseTests: IsTypeTested {
         }
         isTrue(hasProperties, $"No properties found for {x}");
     }
+
+    [TestMethod] public void BaseClassTest() => areEqual(typeof(TClass).BaseType, typeof(TBaseClass));
 
 }

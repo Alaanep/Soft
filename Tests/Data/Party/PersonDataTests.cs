@@ -1,9 +1,10 @@
 ﻿using System;
+using ABC.Data;
 using ABC.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Data.Party {   
-    [TestClass] public class PersonDataTests: SealedClassTests<PersonData> {
+    [TestClass] public class PersonDataTests: SealedClassTests<PersonData, UniqueData> {
         [TestMethod] public void IdTest() => isProperty<string>();
         [TestMethod] public void FirstNameTest() => isProperty<string?>();
         [TestMethod] public void LastNameTest() => isProperty<string?>();

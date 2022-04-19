@@ -1,5 +1,6 @@
 ﻿using System;
 using ABC.Data.Party;
+using ABC.Facade;
 using ABC.Facade.Party;
 using ABC.Tests.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ABC.Tests.Facade.Party
 {   
     [TestClass]
-    public class PersonViewTests: SealedClassTests<PersonView>
+    public class PersonViewTests: SealedClassTests<PersonView, UniqueView>
     {
         [TestMethod] public void IdTest() => isProperty<string>();
         [TestMethod] public void FirstNameTest() => isProperty<string?>();

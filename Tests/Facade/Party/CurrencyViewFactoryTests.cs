@@ -1,11 +1,12 @@
 ﻿using ABC.Aids;
 using ABC.Data.Party;
 using ABC.Domain.Party;
+using ABC.Facade;
 using ABC.Facade.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Facade.Party {
-    [TestClass] public class CurrencyViewFactoryTests: SealedClassTests<CurrencyView> {
+    [TestClass] public class CurrencyViewFactoryTests: SealedClassTests<CurrencyViewFactory, BaseViewFactory<CurrencyView, Currency, CurrencyData>> {
         [TestMethod] public void CreateViewTest() {
             var d = GetRandom.Value<CurrencyData>();
             var e = new Currency(d);

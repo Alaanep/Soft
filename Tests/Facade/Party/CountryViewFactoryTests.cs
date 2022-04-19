@@ -1,11 +1,13 @@
 ﻿using ABC.Aids;
 using ABC.Data.Party;
 using ABC.Domain.Party;
+using ABC.Facade;
 using ABC.Facade.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Facade.Party {
-    [TestClass] public class CountryViewFactoryTests: SealedClassTests<CountryView> {
+    [TestClass] public class CountryViewFactoryTests
+        : SealedClassTests<CountryViewFactory, BaseViewFactory<CountryView, Country, CountryData>> {
         [TestMethod] public void CreateViewTest() {
             var d = GetRandom.Value<CountryData>();
             var e = new Country(d);

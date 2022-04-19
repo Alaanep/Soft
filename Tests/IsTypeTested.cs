@@ -18,8 +18,7 @@ public class IsTypeTested: TestAsserts
     private List<string>? membersOfTest;
     [TestMethod] public void IsAllTested() => isAllTested();
 
-    protected virtual void isAllTested()
-    {
+    protected virtual void isAllTested() {
         nameOfTest = getName(this);
         nameOfType = removeTestsTagFrom(nameOfTest);
         namespaceOfTest = getNamespace(this);
