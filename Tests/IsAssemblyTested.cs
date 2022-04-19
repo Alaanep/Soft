@@ -24,21 +24,46 @@ namespace ABC.Tests {
             testingAssembly = getAssembly(this);
             testingTypes = getTypes(testingAssembly);
             namespaceOfTest = getNameSpace(this);
-            removeNotInNamespace();
+            removeNotInNamespace(testingTypes, namespaceOfTest);
             removeNotClassTests();
             removeNotCorrectTests();
             namespaceOfType = removeTestsTagForm(namespaceOfTest);
             assemblyToBeTested = getAssembly(namespaceOfType);
             typesToBeTested = getTypes(assemblyToBeTested);
+            removeNotInNamespace(typesToBeTested, namespaceOfType);
+            removeInterfaces();
             removeNotNeedTesting();
+            removeDublications();
             removeTested();
             if (allAreTested()) return;
             reportNotAllIsTested();
         }
 
+        private void removeDublications() =>typesToBeTested?.Find(x => isItDublicated(x));
+
+        private bool isItDublicated(Type x) {
+            var t = typesToBeTested?.Find(y => isDublicated(y, x));
+            if (t is null) return false;
+            _ = typesToBeTested?.Remove(t);
+            return t is not null;
+        }
+
+        private bool isDublicated(Type x, Type y)
+        {
+            if (x == y) return false;
+            var nameX = x.Name;
+            var nameY = y.Name;
+            var lengthX = nameX.IndexOf('`');
+            var lengthY = nameY.IndexOf('`');
+            if (lengthX >= 0) nameX = nameX[..lengthX];
+            if (lengthY >= 0) nameY = nameY[..lengthY];
+            return nameX == nameY;
+        }
+
+        private void removeInterfaces() => typesToBeTested?.RemoveAll(t => t.IsInterface);
         private void removeNotCorrectTests() => testingTypes.Remove(x => !isCorrectTest(x));
         private void removeNotClassTests() => testingTypes.Remove(x => !Types.NameEnds(x, testsStr));
-        private void removeNotInNamespace() => testingTypes.Remove(x => !Types.NameStarts(x, namespaceOfTest));
+        private void removeNotInNamespace(List<Type>?t, string? nameSpace) => t?.Remove(x => !Types.NameStarts(x, nameSpace));
         private static string? removeTestsTagForm(string? s) => s?.Remove(testProjectStr);
         private static string? getNameSpace(object obj) => GetNameSpace.OfType(obj);
         private static Assembly? getAssembly(object o) => GetAssembly.OfType(o);
@@ -59,9 +84,9 @@ namespace ABC.Tests {
         private static bool isTestClass(Type x) => x?.HasAttribute<TestClassAttribute>() ?? false;
         private static bool isCorrectlyInherited(Type x) => x.IsInherited(typeof(IsTypeTested));
 
-        private static bool isTestFor(Type testingType, Type typeToBeTested)
-        {
-            var testName = typeToBeTested.Name;
+        private static bool isTestFor(Type testingType, Type typeToBeTested) {
+            var testName = typeToBeTested.FullName??String.Empty;
+            testName = testName.RemoveHead();
             var length = testName.IndexOf('`');
             if (length > 0)testName=testName[..length];
             testName += "Tests";

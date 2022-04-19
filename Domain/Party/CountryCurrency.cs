@@ -2,7 +2,7 @@
 
 namespace ABC.Domain.Party;
 
-public sealed class CountryCurrency : NamedUniqueEntity<CountryCurrencyData> {
+public sealed class CountryCurrency : NamedEntity<CountryCurrencyData> {
     public CountryCurrency() : this(new CountryCurrencyData()) { }
     public CountryCurrency(CountryCurrencyData d) : base(d) { }
     public string CountryId => getValue(Data?.CountryId);

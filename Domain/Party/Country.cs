@@ -1,7 +1,7 @@
 ﻿using ABC.Data.Party;
 
 namespace ABC.Domain.Party {
-    public sealed class Country : NamedUniqueEntity<CountryData> {
+    public sealed class Country : NamedEntity<CountryData> {
         public Country() : this(new CountryData()) { }
         public Country(CountryData d) : base(d) {}
 

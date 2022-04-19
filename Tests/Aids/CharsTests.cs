@@ -14,17 +14,17 @@ namespace ABC.Tests.Aids {
         [TestMethod]
         public void IsNameCharTest() {
             Assert.IsTrue(Chars.IsNameChar(letter));
-            Assert.IsFalse(Chars.IsNameChar(digit));
+            Assert.IsTrue(Chars.IsNameChar(digit));
             Assert.IsFalse(Chars.IsNameChar('.'));
             Assert.IsFalse(Chars.IsNameChar('_'));
-            Assert.IsFalse(Chars.IsNameChar('`'));
+            Assert.IsTrue(Chars.IsNameChar('`'));
             Assert.IsFalse(Chars.IsNameChar(':'));
         }
 
         [TestMethod]
         public void IsFullNameCharTest() {
             Assert.IsTrue(Chars.IsFullNameChar(letter));
-            Assert.IsFalse(Chars.IsFullNameChar(digit));
+            Assert.IsTrue(Chars.IsFullNameChar(digit));
             Assert.IsTrue(Chars.IsFullNameChar('.'));
             Assert.IsFalse(Chars.IsFullNameChar('_'));
             Assert.IsTrue(Chars.IsFullNameChar('`'));
