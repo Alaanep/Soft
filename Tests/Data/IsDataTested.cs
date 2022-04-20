@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Data {
-    [TestClass]public class IsDataTested: IsAssemblyTested {
+    [TestClass]public class IsDataTested: AssemblyTests {
 
     }
 }

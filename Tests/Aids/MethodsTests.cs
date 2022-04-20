@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ABC.Tests.Aids;
 
 [TestClass]
-public class MethodsTests : IsTypeTested
+public class MethodsTests : TypeTests
 {
     [TestMethod]
     public void HasAttributeTest() {

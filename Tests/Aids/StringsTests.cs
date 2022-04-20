@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids;
 
-[TestClass] public class StringsTests : IsTypeTested {
+[TestClass] public class StringsTests : TypeTests {
     private string? testStr;
     [TestInitialize] public void Init() => testStr = "a1b1c1.d1e1f1.g1h1i1";
     [TestMethod] public void RemoveTest() => areEqual("abc.def.ghi", Strings.Remove(testStr, "1"));
@@ -21,6 +21,6 @@ namespace ABC.Tests.Aids;
         isTrue(Strings.IsTypeFullName(Strings.Remove(testStr, "1")));
     }
     [TestMethod] public void RemoveTailTest() => areEqual("a1b1c1.d1e1f1", Strings.RemoveTail(testStr));
-
+    [TestMethod] public void RemoveHeadTest() => areEqual("d1e1f1.g1h1i1", Strings.RemoveHead(testStr));
 
 }

@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids {
     [TestClass] 
-    public class GetAssemblyTests : IsTypeTested {
+    public class GetAssemblyTests : TypeTests {
 
         private string? assemblyName;
         private Assembly? assembly;

@@ -3,7 +3,7 @@ using ABC.Aids;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids;
-[TestClass] public class SafeTests : IsTypeTested {
+[TestClass] public class SafeTests : TypeTests {
     private int expected;
     private int def;
 

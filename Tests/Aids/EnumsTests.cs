@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids {
     
-    [TestClass]public class EnumsTests : IsTypeTested
+    [TestClass]public class EnumsTests : TypeTests
     {
         [TestMethod] public void DescriptionTest() 
             => areEqual("Not Applicable", Enums.Description(IsoGender.NotApplicable));

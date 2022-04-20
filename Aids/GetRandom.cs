@@ -84,7 +84,7 @@ public static class GetRandom {
         return null;
     }
 
-    private static Type getUnderLyingType(Type type) {
+    internal static Type getUnderLyingType(Type type) {
         var x = Nullable.GetUnderlyingType(type);
         return (x is not null) ? x : type;
     }

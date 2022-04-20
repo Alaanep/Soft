@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Infra {
-    [TestClass]public class IsInfraTested: IsAssemblyTested {
+    [TestClass]public class IsInfraTested: AssemblyTests {
     }
 }

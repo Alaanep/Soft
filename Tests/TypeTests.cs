@@ -1,12 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Reflection;
 using ABC.Aids;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Soft;
 
 namespace ABC.Tests;
 
-public class IsTypeTested: TestAsserts
+public class TestHost<TProgram> : WebApplicationFactory<TProgram> where TProgram: class{}
+
+public class HostTests : TestAsserts
+{
+    internal static readonly TestHost<Program> host;
+    internal static readonly HttpClient client;
+
+    static HostTests() {
+        host = new TestHost<Program>();
+        client = host.CreateClient();
+    }
+}
+
+public class TypeTests: HostTests
 {
     private string? nameOfTest;
     private string? nameOfType;
@@ -64,7 +80,7 @@ public class IsTypeTested: TestAsserts
     private static bool isTestClass(Type x) => x?.HasAttribute<TestClassAttribute>() ?? false;
     private static bool isTestMethod(string methodName, Type t) =>
         t?.Method(methodName).HasAttribute<TestMethodAttribute>() ?? false;
-    private static bool isCorrectlyInherited(Type x) => x.IsInherited(typeof(IsTypeTested));
+    private static bool isCorrectlyInherited(Type x) => x.IsInherited(typeof(TypeTests));
     private void removeNotNeedTesting() => membersOfType?.Remove(x => !isTypeToBeTested(x));
     private static bool isTypeToBeTested(string x) => x?.IsTypeName() ?? false;
     private void removeTested() => membersOfType?.Remove(x => isItTested(x));

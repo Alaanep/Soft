@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Core {
-    [TestClass] public class IsCoreTested: IsAssemblyTested {
+    [TestClass] public class IsCoreTested: AssemblyTests {
     }
 }

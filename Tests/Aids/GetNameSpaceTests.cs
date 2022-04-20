@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids;
 
-[TestClass] public class GetNameSpaceTests : IsTypeTested {
+[TestClass] public class GetNameSpaceTests : TypeTests {
     [TestMethod] public void OfTypeTest() {
         var obj = new CurrencyData();
         var name = obj.GetType().Namespace;

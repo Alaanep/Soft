@@ -7,8 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids;
 
-[TestClass] public class GetRandomTests : IsTypeTested
-{
+[TestClass] public class GetRandomTests : TypeTests {
     private void test<T>(T min, T max) where T: IComparable<T> {
         var x = GetRandom.Value(min, max);
         var y = GetRandom.Value(min, max);
@@ -58,22 +57,12 @@ namespace ABC.Tests.Aids;
     [DataRow('A', 'Z')]
     [TestMethod] public void CharTest(char min, char max)=>test(min, max);
 
-    [TestMethod] public void BoolTest() {
-        var x = GetRandom.Bool();
-        var y = GetRandom.Bool();
-        var i = 0;
-        while (x==y){
-            y = GetRandom.Bool();
-            if(i==5) areNotEqual(x,y);
-            i++;
-        }
-    }
+    [TestMethod] public void BoolTest() => testManyTimes(() => GetRandom.Bool());
 
     [DynamicData(nameof(DateTimeValues), DynamicDataSourceType.Method)]
     [TestMethod] public void DateTimeTest(DateTime min, DateTime max) => test(min, max);
 
-    private static IEnumerable<object[]> DateTimeValues() => new List<object[]>()
-    {
+    private static IEnumerable<object[]> DateTimeValues() => new List<object[]>() {
         new object[]{DateTime.Now.AddYears(-100), DateTime.Now.AddYears(100)},
         new object[]{DateTime.Now.AddYears(100), DateTime.Now.AddYears(-100)},
         new object[]{ DateTime.MaxValue.AddYears(-100), DateTime.MaxValue },
@@ -98,4 +87,38 @@ namespace ABC.Tests.Aids;
         //areNotEqual(x.Gender, y.Gender, nameof(x.Gender));
         areNotEqual(x?.Dob, y?.Dob, nameof(x.Dob));
     }
+
+    [TestMethod] public void EnumOfGenericTest() => testManyTimes(()=> GetRandom.EnumOf<IsoGender>());
+    
+    [DataRow(typeof(IsoGender))]
+    [TestMethod] public void EnumOfTest(Type t) => testManyTimes (()=> GetRandom.EnumOf(t));
+
+    private void testManyTimes<T>(Func<T>f, int count =5 ) {
+        var x = f();
+        var y = f();
+        var i = 0;
+        while (x.Equals(y)) {
+            y = f();
+            if (i == count) areNotEqual(x, y);
+            i++;
+        }
+    }
+
+    [DataRow(typeof(bool?), false)]
+    [DataRow(typeof(int), false)]
+    [DataRow(typeof(decimal?), false)]
+    [DataRow(typeof(string), false)]
+    [DataRow(typeof(IsoGender?), false)]
+    [DataRow(typeof(IsoGender), true)]
+    [DataRow(typeof(DateTime), false)]
+    [TestMethod] public void IsEnumTest(Type t, bool expected) => areEqual(expected, GetRandom.isEnum(t));
+
+    [DataRow(typeof(bool?), typeof(bool))]
+    [DataRow(typeof(int?), typeof(int))]
+    [DataRow(typeof(decimal?), typeof(decimal))]
+    [DataRow(typeof(string), typeof(string))]
+    [DataRow(typeof(IsoGender?), typeof(IsoGender))]
+    [DataRow(typeof(DateTime?), typeof(DateTime))]
+    [TestMethod] public void GetUnderlyingTypeTest(Type nullable, Type expected) 
+        => areEqual(expected, GetRandom.getUnderLyingType(nullable));
 }

@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Aids {
     
-    [TestClass] public class IsAidsTested: IsAssemblyTested {
+    [TestClass] public class IsAidsTested: AssemblyTests {
 
     }
 }
