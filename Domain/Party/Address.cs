@@ -9,6 +9,7 @@ namespace ABC.Domain.Party {
         public string Region => getValue(Data?.Region);
         public string ZipCode => getValue(Data?.ZipCode);
         public string CountryId => getValue(Data?.CountryId);
-        public override string ToString() => $"{Street} {City} {ZipCode} {CountryId}";
+        public override string ToString() => $"{Street} {City} {ZipCode} {CountryId} {Country?.Name}";
+        public Country? Country => GetRepo.Instance<ICountriesRepo>()?.Get(CountryId);
     }
 }
