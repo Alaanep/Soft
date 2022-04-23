@@ -14,6 +14,11 @@ namespace ABC.Infra {
             db = c;
             set = s;
         }
+
+        internal void clear() {
+            set?.RemoveRange(set);
+            db.SaveChanges();
+        }
         public abstract bool Add(TDomain obj);
         public abstract TDomain Get(string id);
         public abstract List<TDomain> Get();

@@ -16,10 +16,13 @@ namespace ABC.Tests.Domain;
     [TestMethod] public void InstanceTest() 
         => Assert.IsInstanceOfType(GetRepo.Instance<ICountriesRepo>(), typeof(CountriesRepo));
 
-    [TestMethod] public void SetServiceTest() {
+    [TestMethod] public void SetServiceTest()
+    {
+        var s = GetRepo.service;
         var x = new testClass();
         GetRepo.SetService(x);
         areEqual(x, GetRepo.service);
+        GetRepo.service = s;
     }
 
 }
