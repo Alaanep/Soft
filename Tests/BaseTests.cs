@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using ABC.Aids;
+using ABC.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests;
@@ -22,16 +23,16 @@ public abstract class BaseTests<TClass, TBaseClass>: TypeTests where TClass : cl
         var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
         var propertyInfo = obj.GetType().GetProperty(memberName);
         isNotNull(propertyInfo);
-        if (isNullOrDefault(value)) value = random<T>();
+        if (!isReadOnly && isNullOrDefault(value)) value = random<T>();
         if (canWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(obj, value);
         return propertyInfo.GetValue(obj);
     }
 
     protected void isReadOnly<T>(T? value) => isProperty(value, true, nameof(isReadOnly));
 
-    protected object? isReadOnly<T>() { 
+    protected override object? isReadOnly<T>(string? callingMethod=null) { 
        var v = default(T);
-       return getProperty(ref v, true, nameof(isReadOnly));
+       return getProperty(ref v, true, callingMethod??nameof(isReadOnly));
     }
     private static bool isNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;//kas T tüüp on oma vaikeväärtusega võrdne
 

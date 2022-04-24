@@ -8,6 +8,7 @@ namespace ABC.Tests.Domain.Party;
 [TestClass]
 public class CurrencyTests : SealedClassTests<Currency, NamedEntity<CurrencyData>>
 {
-    [TestMethod] public void CountryCurrenciesTest() => isInconclusive();
+    [TestMethod] public void CountryCurrenciesTest() => 
+        ItemsTest<ICountryCurrenciesRepo, CountryCurrency, CountryCurrencyData>(d => d.CurrencyId = obj.Id, d => new CountryCurrency(d), () => obj.CountryCurrencies);
     [TestMethod] public void CountriesTest() => isInconclusive();
 }

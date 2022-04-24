@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ABC.Tests.TestAsserts" Collapsed="true">
+    <Position X="4.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAABQAAAMAAAAABAACAAAAQAAAACAAAAAA=</HashCode>
+      <FileName>TestAsserts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABC.Tests.AssemblyTests">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABIAMQAAAECAFCgGAQBwCgAgKApAQAgAgAEIIAACAA=</HashCode>
+      <FileName>AssemblyTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABC.Tests.HostTests">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAIAAAAAAAAAQAAgABAAAAAA=</HashCode>
+      <FileName>HostTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABC.Tests.TypeTests">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABIAkgAAAAIABCAmAAA0AAQAYApAwCABAAEAAAgAAA=</HashCode>
+      <FileName>TypeTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABC.Tests.BaseTests&lt;TClass, TBaseClass&gt;">
+    <Position X="10.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAIAABAACAABABAAAAAAESAAQIAAAAAAA=</HashCode>
+      <FileName>BaseTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABC.Tests.AbstractClassTests&lt;TClass, TBaseClass&gt;">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AbstractClassTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ABC.Tests.SealedClassTests&lt;TClass, TBaseClass&gt;">
+    <Position X="13" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>SealedClassTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

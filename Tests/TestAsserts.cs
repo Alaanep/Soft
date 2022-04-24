@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests;
@@ -14,4 +15,19 @@ public abstract class TestAsserts
     protected static void isInstanceOfType(object o, Type expectedType, string? message = null) => Assert.IsInstanceOfType(o, expectedType, message);
     protected static void isTrue(bool? b, string? message=null) => Assert.IsTrue(b ?? false, message ?? string.Empty);
     protected static void isFalse(bool? b, string? message = null) => Assert.IsFalse(b ?? true, message ?? string.Empty);
+
+    protected virtual void areEqualProperties(object? a, object? b) {
+        isNotNull(a);
+        isNotNull(b);
+        var tA = a.GetType();
+        var tB = b.GetType();
+        
+        foreach (var propertyInfoA in tA?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
+            var vA = propertyInfoA.GetValue(a, null);
+            var propertyInfoB = tB?.GetProperty(propertyInfoA.Name);
+            var vB = propertyInfoB?.GetValue(b, null);
+            areEqual(vA, vB, $"For property {propertyInfoA.Name}.");
+        }
+    }
+
 }

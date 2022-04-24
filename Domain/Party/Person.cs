@@ -10,5 +10,6 @@ namespace ABC.Domain.Party {
         public IsoGender Gender => getValue(Data?.Gender);
         public DateTime Dob => getValue(Data?.Dob);
         public override string ToString() => $"{FirstName} {LastName} ({Gender.Description()} {Dob})";
+        public List<Address>? Addresses { get; set; }
     }
 }
