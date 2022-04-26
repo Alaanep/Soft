@@ -42,7 +42,7 @@ namespace Soft
             services.AddTransient<ICountriesRepo, CountriesRepo>();
             services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
             services.AddTransient<ICountryCurrenciesRepo, CountryCurrenciesRepo>();
-            services.AddTransient<IPersonAddressRepo, PersonAddressesRepo>();
+            services.AddTransient<IPersonAddressesRepo, PersonAddressesRepo>();
 
 
         }

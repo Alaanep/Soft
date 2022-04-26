@@ -15,4 +15,10 @@ public class MethodsTests : TypeTests
         isTrue(Methods.HasAttribute<TestMethodAttribute>(m));
         isFalse(Methods.HasAttribute<TestInitializeAttribute>(m));
     }
+
+    [TestMethod]public void GetAttributeTest(){
+        var m = GetType().GetMethod(nameof(GetAttributeTest));
+        isNotNull(Methods.GetAttribute<TestMethodAttribute>(m));
+        isNull(Methods.GetAttribute<TestInitializeAttribute>(m));
+    }
 }

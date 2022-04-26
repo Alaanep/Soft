@@ -3,10 +3,5 @@ using ABC.Facade.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ABC.Tests.Facade.Party {
-    [TestClass]
-    public class CountryViewTests: SealedClassTests<CountryView, IsoNamedView> {
-        [TestMethod] public void NameTest() => isProperty<string>();
-        [TestMethod] public void CodeTest() => isProperty<string>();
-        [TestMethod] public void DescriptionTest() => isProperty<string>();
-    }
+    [TestClass]public class CountryViewTests: SealedClassTests<CountryView, IsoNamedView> {}
 }

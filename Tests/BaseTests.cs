@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
 using ABC.Aids;
@@ -19,13 +21,34 @@ public abstract class BaseTests<TClass, TBaseClass>: TypeTests where TClass : cl
         var actual = getProperty(ref value, isReadOnly, callingMethod);
         areEqual(value, actual);
     }
-    protected object? getProperty<T>(ref T? value, bool isReadOnly, string callingMethod) {
-        var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
-        var propertyInfo = obj.GetType().GetProperty(memberName);
+
+    protected PropertyInfo? isDisplayNamed<T>(string? displayName=null, T? value = default, bool isReadOnly = false, string? callingMethod = null){
+        callingMethod ??= nameof(isDisplayNamed);
+        var pi = getPropertyInfo(callingMethod);
+        isProperty(value, isReadOnly, callingMethod);
+        if (displayName == null) return pi;
+        var a = pi.GetAttribute<DisplayNameAttribute>();
+        areEqual(displayName, a.DisplayName, nameof(DisplayNameAttribute));
+        return pi;
+    }
+
+    protected void isRequired<T>(string? displayName = null, T? value = default, bool isReadOnly = false){
+        var pi = isDisplayNamed(displayName, value, isReadOnly, nameof(isRequired));
+        isTrue(pi?.HasAttribute<RequiredAttribute>(), nameof(RequiredAttribute));
+    }
+
+    protected object? getProperty<T>(ref T? value, bool isReadOnly, string callingMethod){
+        var propertyInfo = getPropertyInfo(callingMethod);
         isNotNull(propertyInfo);
         if (!isReadOnly && isNullOrDefault(value)) value = random<T>();
         if (canWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(obj, value);
         return propertyInfo.GetValue(obj);
+    }
+
+    protected PropertyInfo? getPropertyInfo(string callingMethod) {
+        var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
+        return obj.GetType().GetProperty(memberName);
+   
     }
 
     protected void isReadOnly<T>(T? value) => isProperty(value, true, nameof(isReadOnly));

@@ -18,5 +18,12 @@ public class PersonTests : SealedClassTests<Person, UniqueEntity<PersonData>> {
         var expected = $"{obj.FirstName} {obj.LastName} ({obj.Gender.Description()} {obj.Dob})";
         areEqual(expected, obj.ToString());
     }
-    [TestMethod] public void AddressesTest() => isInconclusive();
+    [TestMethod]
+    public void PersonAddressesTest() =>
+        ItemsTest<IPersonAddressesRepo, PersonAddress, PersonAddressData>
+            (d => d.PersonId = obj.Id, d => new PersonAddress(d), () => obj.PersonAddresses);
+
+    [TestMethod]
+    public void AddressesTest() => relatedItemsTest<IAddressRepo, PersonAddress, Address, AddressData>
+        (PersonAddressesTest, () => obj.PersonAddresses, () => obj.Addresses, x => x.AddressId, d => new Address(d), c => c?.Data, x => x?.Address?.Data);
 }

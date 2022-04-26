@@ -10,6 +10,16 @@ namespace ABC.Domain.Party {
         public IsoGender Gender => getValue(Data?.Gender);
         public DateTime Dob => getValue(Data?.Dob);
         public override string ToString() => $"{FirstName} {LastName} ({Gender.Description()} {Dob})";
-        public List<Address>? Addresses { get; set; }
+        
+
+        public List<PersonAddress> PersonAddresses
+            => GetRepo.Instance<IPersonAddressesRepo>()?
+                .GetAll(x => x.PersonId)?
+                .Where(x => x.PersonId == Id)?
+                .ToList() ?? new List<PersonAddress>();
+
+        public List<Address?> Addresses =>
+            PersonAddresses
+                .Select(x => x.Address)?.ToList() ?? new List<Address?>();
     }
 }

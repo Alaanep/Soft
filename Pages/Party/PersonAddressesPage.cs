@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ABC.Pages.Party;
 
-public class PersonAddressesPage : PagedPage<PersonAddressView, PersonAddress, IPersonAddressRepo> {
+public class PersonAddressesPage : PagedPage<PersonAddressView, PersonAddress, IPersonAddressesRepo> {
     private readonly IPersonRepo persons;
     private readonly IAddressRepo addresses;
 
-    public PersonAddressesPage(IPersonAddressRepo r, IPersonRepo p, IAddressRepo a) : base(r) {
+    public PersonAddressesPage(IPersonAddressesRepo r, IPersonRepo p, IAddressRepo a) : base(r) {
         persons = p;
         addresses = a;
     }

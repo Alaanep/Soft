@@ -5,11 +5,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ABC.Tests.Facade.Party {
     [TestClass]
     public class AddressViewTests: SealedClassTests<AddressView, UniqueView> {
-        [TestMethod] public void IdTest() => isProperty<string>();
-        [TestMethod] public void StreetTest() => isProperty<string?>();
-        [TestMethod] public void CityTest() => isProperty<string?>();
-        [TestMethod] public void RegionTest() => isProperty<string?>();
-        [TestMethod] public void ZipCodeTest() => isProperty<string?>();
-        [TestMethod] public void CountryIdTest() => isProperty<string?>();
+        
+        [TestMethod] public void StreetTest() => isDisplayNamed<string?>("Street");
+        [TestMethod] public void CityTest() => isDisplayNamed<string?>("City");
+        [TestMethod] public void RegionTest() => isDisplayNamed<string?>("Region");
+        [TestMethod] public void ZipCodeTest() => isDisplayNamed<string?>("Zip Code");
+        [TestMethod] public void CountryIdTest() => isDisplayNamed<string?>("Country id");
     }
 }
