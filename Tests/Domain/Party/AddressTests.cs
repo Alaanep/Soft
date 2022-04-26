@@ -28,7 +28,10 @@ namespace ABC.Tests.Domain.Party {
         public void CountryIdTest() => isReadOnly(obj.Data.CountryId);
 
         [TestMethod]
-        public void ToStringTest() => isInconclusive();
+        public void ToStringTest() {   
+            var expected = $"{obj.Street} {obj.City} {obj.ZipCode} {obj.CountryId} {obj.Country?.Name}";
+            areEqual(expected, obj.ToString());
+        }
 
         [TestMethod]
         public void CountryTest() =>

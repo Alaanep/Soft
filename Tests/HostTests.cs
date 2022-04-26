@@ -31,6 +31,7 @@ public abstract class HostTests : TestAsserts
     }
 
     protected virtual object? isReadOnly<T>(string? callingMethod = null) => null;
+    protected virtual void arePropertiesEqual(object? data1, object? data2) { isInconclusive(); }
 
     protected void ItemsTest<TRepo, TObj, TData>(Action<TData> setId, Func<TData, TObj> toObj, Func<List<TObj>> getList)
         where TRepo : class, IRepo<TObj>
@@ -42,7 +43,7 @@ public abstract class HostTests : TestAsserts
         var r = GetRepo.Instance<TRepo>();
         isNotNull(r);
         var list = new List<TData>();
-        var count = GetRandom.Int32(0, 30);
+        var count = GetRandom.Int32(5, 30);
         for (var i = 0; i < count; i++) {
             var x = GetRandom.Value<TData>();
             if (GetRandom.Bool()) {
@@ -71,7 +72,7 @@ public abstract class HostTests : TestAsserts
         var r = GetRepo.Instance<TRepo>();
         var d = GetRandom.Value<TData>();
         d.Id = id;
-        var count = GetRandom.Int32(0, 30);
+        var count = GetRandom.Int32(5, 30);
         var index = GetRandom.Int32(0, count);
         for (var i = 0; i < count; i++) {
             var x = (i == index) ? d : GetRandom.Value<TData>();
@@ -81,5 +82,32 @@ public abstract class HostTests : TestAsserts
         r.PageSize = 30;
         areEqual(count, r.Get().Count);
         areEqualProperties(d, getObject());
+    }
+
+    protected void relatedItemsTest<TRepo, TRelatedItem, TItem, TData>(
+        Action relatedTest,
+        Func<List<TRelatedItem>> relatedItems,
+        Func<List<TItem?>> items,
+        Func<TRelatedItem, string> detailId,
+        Func<TData, TItem> toObj,
+        Func<TItem?, TData?> toData,
+        Func<TRelatedItem?, TData?> relatedToData)
+        where TRepo : class, IRepo<TItem>
+        where TItem : UniqueEntity
+        where TRelatedItem : UniqueEntity{
+        relatedTest();
+        var list = relatedItems();
+        var r = GetRepo.Instance<TRepo>();
+        foreach (var e in list){
+            var x = GetRandom.Value<TData>();
+            if (x is not null) x.Id = detailId(e);
+            r.Add(toObj(x));
+        }
+        var currencies = items();
+        areEqual(list.Count, currencies.Count);
+        foreach (var e in list){
+            var a = currencies.Find(x => x.Id == detailId(e));
+            arePropertiesEqual(toData(a), relatedToData(e));
+        }
     }
 }

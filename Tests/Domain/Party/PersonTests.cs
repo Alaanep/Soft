@@ -13,6 +13,10 @@ public class PersonTests : SealedClassTests<Person, UniqueEntity<PersonData>> {
     [TestMethod] public void LastNameTest() => isReadOnly(obj.Data.LastName);
     [TestMethod] public void GenderTest() => isReadOnly(obj.Data.Gender);
     [TestMethod] public void DobTest() => isReadOnly(obj.Data.Dob);
-    [TestMethod] public void ToStringTest() => isInconclusive();
+
+    [TestMethod] public void ToStringTest() {
+        var expected = $"{obj.FirstName} {obj.LastName} ({obj.Gender.Description()} {obj.Dob})";
+        areEqual(expected, obj.ToString());
+    }
     [TestMethod] public void AddressesTest() => isInconclusive();
 }

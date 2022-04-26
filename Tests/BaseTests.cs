@@ -56,7 +56,7 @@ public abstract class BaseTests<TClass, TBaseClass>: TypeTests where TClass : cl
         return string.Empty;
     }
 
-    protected internal static void arePropertiesEqual(object x, object y) {
+    protected override  void arePropertiesEqual(object? x, object? y) {
         var e = Array.Empty<PropertyInfo>();
         var px = x?.GetType().GetProperties() ?? e;
         var hasProperties = false;
