@@ -95,5 +95,4 @@ public abstract class BaseTests<TClass, TBaseClass>: TypeTests where TClass : cl
     }
 
     [TestMethod] public void BaseClassTest() => areEqual(typeof(TClass).BaseType, typeof(TBaseClass));
-
 }

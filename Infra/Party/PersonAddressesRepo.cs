@@ -3,7 +3,7 @@ using ABC.Domain.Party;
 
 namespace ABC.Infra.Party;
 
-public class PersonAddressesRepo : Repo<PersonAddress, PersonAddressData>, IPersonAddressesRepo {
+public sealed class PersonAddressesRepo : Repo<PersonAddress, PersonAddressData>, IPersonAddressesRepo {
     public PersonAddressesRepo(ABCDb? db) : base(db, db?.PersonAddresses) { }
     protected override PersonAddress toDomain(PersonAddressData d) => new(d);
     /*internal override IQueryable<PersonAddressData> addFilter(IQueryable<PersonAddressData> q) {

@@ -38,7 +38,7 @@ namespace Soft
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IPersonRepo, PersonsRepo>();
-            services.AddTransient<IAddressRepo, AddressRepo>();
+            services.AddTransient<IAddressRepo, AddressesRepo>();
             services.AddTransient<ICountriesRepo, CountriesRepo>();
             services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
             services.AddTransient<ICountryCurrenciesRepo, CountryCurrenciesRepo>();
