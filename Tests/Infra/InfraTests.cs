@@ -12,7 +12,7 @@ namespace ABC.Tests.Infra {
 
         private class testClass : Repo<Address, AddressData> {
             public testClass(DbContext? c, DbSet<AddressData>? s) : base(c, s) { }
-            protected override Address toDomain(AddressData d) => new(d);
+            protected internal override Address toDomain(AddressData d) => new(d);
         }
     }
 }

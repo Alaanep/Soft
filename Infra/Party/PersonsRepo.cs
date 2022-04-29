@@ -5,7 +5,7 @@ namespace ABC.Infra.Party
 {
     public sealed class PersonsRepo: Repo<Person, PersonData>, IPersonRepo {
         public PersonsRepo(ABCDb? db) : base(db, db?.Persons) { }
-        protected override Person toDomain(PersonData d) => new(d);
+        protected internal override Person toDomain(PersonData d) => new(d);
 
         /*internal override IQueryable<PersonData> addFilter(IQueryable<PersonData> q) {
             var y = CurrentFilter;

@@ -4,7 +4,7 @@ using ABC.Domain.Party;
 namespace ABC.Infra.Party {
     public sealed  class CountriesRepo: Repo<Country, CountryData>, ICountriesRepo {
         public CountriesRepo(ABCDb? db) : base(db, db?.Countries) { }
-        protected override Country toDomain(CountryData d) => new(d);
+        protected internal override Country toDomain(CountryData d) => new(d);
         /*internal override IQueryable<CountryData> addFilter(IQueryable<CountryData> q)
         {
             var y = CurrentFilter;

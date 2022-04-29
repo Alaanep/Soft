@@ -12,7 +12,7 @@ namespace ABC.Tests.Infra
     public class RepoTests : AbstractClassTests<Repo<Address, AddressData>, PagedRepo<Address, AddressData>>{
         private class testClass : Repo<Address, AddressData>{
             public testClass(DbContext? c, DbSet<AddressData>? s) : base(c, s) { }
-            protected override Address toDomain(AddressData d) => new(d);
+            protected internal override Address toDomain(AddressData d) => new(d);
         }
         protected override Repo<Address, AddressData> createObj() => new testClass(null, null);
     }
@@ -39,7 +39,7 @@ namespace ABC.Tests.Infra
     public class CrudRepoTests : AbstractClassTests<CrudRepo<Address, AddressData>, BaseRepo<Address, AddressData>>{
         private class testClass : CrudRepo<Address, AddressData>{
             public testClass(DbContext? c, DbSet<AddressData>? s) : base(c, s) { }
-            protected override Address toDomain(AddressData d) => new(d);
+            protected internal override Address toDomain(AddressData d) => new(d);
         }
         protected override CrudRepo<Address, AddressData> createObj() => new testClass(null, null);
     }
@@ -48,7 +48,7 @@ namespace ABC.Tests.Infra
     public class FilteredRepoTests : AbstractClassTests<FilteredRepo<Address, AddressData>, CrudRepo<Address, AddressData>>{
         private class testClass : FilteredRepo<Address, AddressData>{
             public testClass(DbContext? c, DbSet<AddressData>? s) : base(c, s) { }
-            protected override Address toDomain(AddressData d) => new(d);
+            protected  internal override Address toDomain(AddressData d) => new(d);
         }
         protected override FilteredRepo<Address, AddressData> createObj() => new testClass(null, null);
     }
@@ -57,7 +57,7 @@ namespace ABC.Tests.Infra
     public class OrdereredRepoTests : AbstractClassTests<OrderedRepo<Address, AddressData>, FilteredRepo<Address, AddressData>>{
         private class testClass : OrderedRepo<Address, AddressData>{
             public testClass(DbContext? c, DbSet<AddressData>? s) : base(c, s) { }
-            protected override Address toDomain(AddressData d) => new(d);
+            protected internal override Address toDomain(AddressData d) => new(d);
         }
         protected override OrderedRepo<Address, AddressData> createObj() => new testClass(null, null);
     }
@@ -68,7 +68,7 @@ namespace ABC.Tests.Infra
         private class testClass : PagedRepo<Address, AddressData>
         {
             public testClass(DbContext? c, DbSet<AddressData>? s) : base(c, s) { }
-            protected override Address toDomain(AddressData d) => new(d);
+            protected internal override Address toDomain(AddressData d) => new(d);
         }
         protected override PagedRepo<Address, AddressData> createObj() => new testClass(null, null);
     }

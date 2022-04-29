@@ -5,7 +5,7 @@ namespace ABC.Infra.Party;
 
 public sealed class AddressesRepo : Repo<Address, AddressData>, IAddressRepo {
     public AddressesRepo(ABCDb? db) : base(db, db?.Addresses) { }
-    protected override Address toDomain(AddressData d) => new(d);
+    protected internal override Address toDomain(AddressData d) => new(d);
     /*internal override IQueryable<AddressData> addFilter(IQueryable<AddressData> q)
     {
         var y = CurrentFilter;

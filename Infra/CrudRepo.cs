@@ -71,5 +71,5 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData> where 
             return true;
         } catch { return false; }
     }
-    protected abstract TDomain toDomain(TData d);
+    protected internal abstract TDomain toDomain(TData d);
 }
