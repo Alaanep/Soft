@@ -32,7 +32,7 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData> where 
     }
     public override TDomain Get(string id) => GetAsync(id).GetAwaiter().GetResult();
 
-    public override List<TDomain> GetAll<TKey>(Func<TDomain, TKey>? orderBy=null) {
+    public override List<TDomain> GetAll(Func<TDomain, dynamic>? orderBy=null) {
         var r = new List<TDomain>();
         if (set is null) return r;
         foreach (var d in set) r.Add(toDomain(d));
