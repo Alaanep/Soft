@@ -8,8 +8,8 @@ namespace ABC.Infra {
         // todo more details, see https://aka.ms/RazorPagesCRUD.
         // todo To protect from overposting attacks, enable the specific properties you want to bind to, for
         // todo more details, see https://aka.ms/RazorPagesCRUD.
-        protected internal readonly DbContext? db;
-        protected internal readonly DbSet<TData>? set;
+        protected internal  DbContext? db { get; }
+        protected internal  DbSet<TData>? set { get; }
         protected BaseRepo(DbContext? c, DbSet<TData>? s) {
             db = c;
             set = s;
