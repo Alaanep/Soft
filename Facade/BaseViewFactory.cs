@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using ABC.Core;
 using ABC.Data;
 using ABC.Domain;
 
@@ -11,15 +12,7 @@ public abstract  class BaseViewFactory<TView, TEntity, TData>
 {
     protected abstract TEntity toEntity(TData d);
 
-    protected virtual void copy(object? from, object? to) {
-        var tFrom = from?.GetType();
-        var tTo = to?.GetType();
-        foreach (var propertyInfoFrom in tFrom?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
-            var v = propertyInfoFrom.GetValue(from, null);
-            var propertyInfoTo = tTo?.GetProperty(propertyInfoFrom.Name);
-            propertyInfoTo?.SetValue(to, v, null);
-        }
-    }
+    protected virtual void copy(object? from, object? to) => Copy.Properties(from, to);
     public virtual TEntity Create(TView? v) {
         var d = new TData();
         copy(v, d);

@@ -31,7 +31,14 @@ namespace Soft
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            services.AddRazorPages(options => {
+                /*options.Conventions.AuthorizePage("/Countries/Create");
+                options.Conventions.AuthorizePage("/Countries/Delete");
+                options.Conventions.AuthorizePage("/Countries/Edit");
+                options.Conventions.AuthorizePage("/Currencies/Create");
+                options.Conventions.AuthorizePage("/Countries/Delete");
+                options.Conventions.AuthorizePage("/Countries/Edit");*/
+            });
 
             services.AddDbContext<ABCDb>(options =>
                 options.UseSqlServer(

@@ -22,7 +22,8 @@ namespace Soft.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CountryId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,6 +75,7 @@ namespace Soft.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -91,6 +93,7 @@ namespace Soft.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CountryId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrencyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -106,6 +109,7 @@ namespace Soft.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -123,6 +127,7 @@ namespace Soft.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PersonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -141,7 +146,8 @@ namespace Soft.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    Dob = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Dob = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -5,9 +5,13 @@
     ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
     Layout = "_Layout";
     var itemId = Model?.Item?.Id ?? string.Empty;
+    var token = Model?.Token ?? string.Empty;
+    var errorMessage = Model?.ErrorMesasage ?? string.Empty;
 }
 
 <h1>@ViewData["Title"]</h1>
+
+<p class="text-danger">@errorMessage</p>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -17,6 +21,7 @@
     
     <form method="post" 
           asp-route-id="@itemId"
+          asp-route-token="@token"
           asp-page-handler="Delete"
           asp-route-order="@Model?.CurrentOrder"
           asp-route-idx="@Model?.PageIndex"

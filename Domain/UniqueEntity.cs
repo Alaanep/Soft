@@ -11,6 +11,7 @@ public abstract class UniqueEntity {
     protected static DateTime getValue(DateTime? v) => v ?? defaultDate;
     protected static IsoGender getValue(IsoGender? v) => v ?? IsoGender.NotApplicable;
     public abstract string Id { get; }
+    public abstract byte[] Token { get; }
 }
 
 public abstract class UniqueEntity<TData>: UniqueEntity where TData : UniqueData, new() {
@@ -19,4 +20,5 @@ public abstract class UniqueEntity<TData>: UniqueEntity where TData : UniqueData
     public UniqueEntity() : this(new TData()) { }
     public UniqueEntity(TData d) => data = d;
     public override string Id => getValue(Data?.Id);
+    public override byte[] Token => Data?.Token?? Array.Empty<byte>();
 }
