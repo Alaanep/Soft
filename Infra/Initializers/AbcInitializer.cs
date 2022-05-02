@@ -6,6 +6,6 @@ public static class AbcInitializer {
         new PersonsInitializer(abcDb).Init();
         new CountriesInitializer(abcDb).Init();
         new CurrenciesInitializer(abcDb).Init();
-        new CountryCurrencyInitializer(abcDb).Init();
+        new CountryCurrenciesInitializer(abcDb).Init();
     }
 }
