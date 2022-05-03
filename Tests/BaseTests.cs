@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using ABC.Aids;
 using ABC.Domain;
@@ -81,11 +82,12 @@ public abstract class BaseTests<TClass, TBaseClass>: TypeTests where TClass : cl
         return string.Empty;
     }
 
-    protected override  void arePropertiesEqual(object? x, object? y) {
+    protected override  void arePropertiesEqual(object? x, object? y, params string[] excluded) {
         var e = Array.Empty<PropertyInfo>();
         var px = x?.GetType().GetProperties() ?? e;
         var hasProperties = false;
         foreach (var prop in px) {
+            if (excluded?.Contains(prop.Name)??false) continue;
             var a = prop.GetValue(x, null);
             var py = y?.GetType().GetProperty(prop.Name);
             if (py == null) continue;

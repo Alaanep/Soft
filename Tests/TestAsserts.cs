@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,13 +17,14 @@ public abstract class TestAsserts
     protected static void isTrue(bool? b, string? message=null) => Assert.IsTrue(b ?? false, message ?? string.Empty);
     protected static void isFalse(bool? b, string? message = null) => Assert.IsFalse(b ?? true, message ?? string.Empty);
 
-    protected virtual void areEqualProperties(object? a, object? b) {
+    protected virtual void areEqualProperties(object? a, object? b, params string[]exclude) {
         isNotNull(a);
         isNotNull(b);
         var tA = a.GetType();
         var tB = b.GetType();
         
         foreach (var propertyInfoA in tA?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
+            if(exclude?.Contains(propertyInfoA.Name)??false) continue;
             var vA = propertyInfoA.GetValue(a, null);
             var propertyInfoB = tB?.GetProperty(propertyInfoA.Name);
             var vB = propertyInfoB?.GetValue(b, null);

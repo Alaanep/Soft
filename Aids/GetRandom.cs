@@ -49,6 +49,7 @@ public static class GetRandom {
     public static dynamic? Value<T>(T? min=default, T? max=default) {
         var t = getUnderLyingType(typeof(T));
         if (isEnum(t)) return EnumOf<T>();
+        else if(t == typeof(byte[])) return ConcurrencyToken.ToByteArray(String(8,8));
         else if (t == typeof(bool)) return Bool();
         else if (t == typeof(DateTime)) return DateTime(Convert.ToDateTime(min), Convert.ToDateTime(max));
         else if (t == typeof(double)) return Double(Convert.ToDouble(min), Convert.ToDouble(max));
@@ -74,6 +75,7 @@ public static class GetRandom {
     public static dynamic? Value(Type t) {
         t = getUnderLyingType(t);
         if (isEnum(t)) return EnumOf(t);
+        else if (t == typeof(byte[])) return ConcurrencyToken.ToByteArray(String(8, 8));
         else if (t == typeof(bool)) return Bool();
         else if (t == typeof(DateTime)) return DateTime();
         else if (t == typeof(double)) return Double();

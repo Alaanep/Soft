@@ -57,6 +57,7 @@ namespace ABC.Tests.Infra.Party
             var s = q.Expression.ToString();
             isNotNull(q);
             foreach(var p in typeof(TData).GetProperties()){
+                if (p.Name == nameof(UniqueData.Token)) continue;
                 if (p.PropertyType == typeof(string)){
                     isTrue(s.Contains(contains(p.Name)), $"No Where found for property {p.Name}");
                 } else

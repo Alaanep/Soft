@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ABC.Core {
+namespace ABC.Aids {
     public static class Copy {
         public static void Properties(object? from, object? to) {
             var tFrom = from?.GetType();

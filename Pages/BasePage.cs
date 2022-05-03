@@ -1,5 +1,4 @@
 ﻿using ABC.Aids;
-using ABC.Core;
 using ABC.Domain;
 using ABC.Facade;
 using Microsoft.AspNetCore.Mvc;
