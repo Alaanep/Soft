@@ -40,7 +40,8 @@ public abstract class HostTests : TestAsserts
         where TData : UniqueData, new() {
         var o = isReadOnly<List<TObj>>(nameof(ItemsTest));
         isNotNull(o);
-        isInstanceOfType(o, typeof(List<TObj>));
+        if(o.GetType().Name.Contains("Lazy")) isInstanceOfType(o, typeof(Lazy<List<TObj>>));
+        else isInstanceOfType(o, typeof(List<TObj>));
         var r = GetRepo.Instance<TRepo>();
         isNotNull(r);
         var list = new List<TData>();
