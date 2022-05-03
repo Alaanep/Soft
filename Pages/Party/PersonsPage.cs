@@ -2,10 +2,11 @@
 using ABC.Data.Party;
 using ABC.Domain.Party;
 using ABC.Facade.Party;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ABC.Pages.Party;
-
+[Authorize]
 public class PersonsPage: PagedPage <PersonView, Person, IPersonRepo> {
     public PersonsPage(IPersonRepo r) : base(r){}
     protected override Person toObject(PersonView? item) => new PersonViewFactory().Create(item);

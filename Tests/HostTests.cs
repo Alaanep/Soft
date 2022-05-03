@@ -72,18 +72,27 @@ public abstract class HostTests : TestAsserts
         isNotNull(c);
         isInstanceOfType(c, typeof(TObj));
         var r = GetRepo.Instance<TRepo>();
+        int count;
+        var d = addRandomItems<TRepo, TObj, TData>(out count, toObj, id, r);
+        r.PageSize = 30;
+        areEqual(count, r.Get().Count);
+        areEqualProperties(d, getObject(), nameof(UniqueData.Token));
+    }
+
+    internal static TData? addRandomItems<TRepo, TObj, TData>(out int count, Func<TData, TObj> toObj, string? id=null, TRepo? r=null)
+        where TRepo : class, IRepo<TObj>
+        where TObj : UniqueEntity {
+        r ??= GetRepo.Instance<TRepo>();
         var d = GetRandom.Value<TData>();
-        d.Id = id;
-        var count = GetRandom.Int32(5, 30);
+        if(id is not null && d is not null) d.Id = id;
+        count = GetRandom.Int32(5, 30);
         var index = GetRandom.Int32(0, count);
         for (var i = 0; i < count; i++) {
             var x = (i == index) ? d : GetRandom.Value<TData>();
             isNotNull(x);
             r?.Add(toObj(x));
         }
-        r.PageSize = 30;
-        areEqual(count, r.Get().Count);
-        areEqualProperties(d, getObject(), nameof(UniqueData.Token));
+        return d; 
     }
 
     protected void relatedItemsTest<TRepo, TRelatedItem, TItem, TData>(
